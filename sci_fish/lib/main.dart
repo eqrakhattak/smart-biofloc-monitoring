@@ -25,7 +25,15 @@ class MyApp extends StatelessWidget {
                 children: [
                   Container(
                     child: const Center(
-                      child: Text('HOME'),
+                      child: Text(
+                          'HOME',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontFamily: 'Cabin',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                     color: Colors.cyan[700],
                     width: 120.0,
@@ -35,7 +43,12 @@ class MyApp extends StatelessWidget {
                   ),
                   Container(
                     child: const Center(
-                      child: Text('HOME'),
+                      child: Text(
+                          'HOME',
+                      style: TextStyle(
+                        fontFamily: 'Cabin'
+                      ),
+                      ),
                     ),
                     color: Colors.cyan[700],
                     width: 120.0,
@@ -47,20 +60,59 @@ class MyApp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    child: const Center(
-                      child: Text('HOME'),
-                    ),
                     color: Colors.cyan[700],
                     width: 120.0,
                     height: 100.0,
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                              Icons.home,
+                            size: 35.0,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            'HOME',
+                            style: TextStyle(
+                              color: Colors.cyan[50],
+                              fontSize: 20.0,
+                              fontFamily: 'Cabin',
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  Container(
-                    child: const Center(
-                      child: Text('HOME'),
-                    ),
+                  Card(
                     color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.home,
+                              size: 35.0,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              'HOME',
+                              style: TextStyle(
+                                color: Colors.cyan[50],
+                                fontSize: 20.0,
+                                fontFamily: 'Cabin',
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
