@@ -1,21 +1,120 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.cyan,
-        appBar: AppBar(
-          title: Text('SciFish'),
-          backgroundColor: Colors.cyan[200],
-        ),
-        body: Column(
+// import 'constants.dart';
+void main(){
+  runApp(const MyApp());
+}
 
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.cyan[300],
+        appBar: AppBar(
+          title: const Text('SciFish'),
+          backgroundColor: Colors.cyan[700],
+        ),
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                    // margin: EdgeInsets.all(20.0),
+                    // padding: EdgeInsets.all(30.0),
+                  ),
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                  ),
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                  ),
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                  ),
+                  Container(
+                    child: const Center(
+                      child: Text('HOME'),
+                    ),
+                    color: Colors.cyan[700],
+                    width: 120.0,
+                    height: 100.0,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
+
+
 //
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key? key}) : super(key: key);
