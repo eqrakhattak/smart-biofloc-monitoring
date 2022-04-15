@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
 // import 'constants.dart';
-void main(){
-  runApp(const MyApp());
-}
+
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  Card buildCard({required IconData icon, required String text}){
+    return Card(
+      color: Colors.cyan[700],
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                size: 35.0,
+                color: Colors.white,
+              ),
+              Text(
+                text,
+                style: TextStyle(
+                  color: Colors.cyan[50],
+                  fontSize: 20.0,
+                  fontFamily: 'Cabin',
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2.5,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,148 +47,39 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.cyan[700],
         ),
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    child: const Center(
-                      child: Text(
-                          'HOME',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontFamily: 'Cabin',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
-                    // margin: EdgeInsets.all(20.0),
-                    // padding: EdgeInsets.all(30.0),
+          child: Padding(
+            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildCard(icon: Icons.lightbulb, text: 'POWER'),
+                      buildCard(icon: Icons.water, text: 'WATER'),
+                      buildCard(icon: Icons.circle_outlined, text: 'OXYGEN'),
+                      buildCard(icon: Icons.thermostat, text: 'TEMP'),
+                    ],
                   ),
-                  Container(
-                    child: const Center(
-                      child: Text(
-                          'HOME',
-                      style: TextStyle(
-                        fontFamily: 'Cabin'
-                      ),
-                      ),
-                    ),
-                    color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
+                ),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildCard(icon: Icons.home, text: 'FISH'),
+                      buildCard(icon: Icons.food_bank, text: 'FOOD'),
+                      buildCard(icon: Icons.home, text: 'PH'),
+                      buildCard(icon: Icons.air, text: 'AIR'),
+                    ],
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
-                    child: Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                              Icons.home,
-                            size: 35.0,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            'HOME',
-                            style: TextStyle(
-                              color: Colors.cyan[50],
-                              fontSize: 20.0,
-                              fontFamily: 'Cabin',
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.5,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Card(
-                    color: Colors.cyan[700],
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.home,
-                              size: 35.0,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'HOME',
-                              style: TextStyle(
-                                color: Colors.cyan[50],
-                                fontSize: 20.0,
-                                fontFamily: 'Cabin',
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2.5,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    child: const Center(
-                      child: Text('HOME'),
-                    ),
-                    color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
-                  ),
-                  Container(
-                    child: const Center(
-                      child: Text('HOME'),
-                    ),
-                    color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    child: const Center(
-                      child: Text('HOME'),
-                    ),
-                    color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
-                  ),
-                  Container(
-                    child: const Center(
-                      child: Text('HOME'),
-                    ),
-                    color: Colors.cyan[700],
-                    width: 120.0,
-                    height: 100.0,
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
