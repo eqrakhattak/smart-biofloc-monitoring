@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'controller_card.dart';
 import 'icon_content.dart';
-
+import 'power_page.dart';
 const Color activeCardColor = Color(0xFF0097A7);
+const Color inactiveCardColor = Color(0xFF00ACC1);
 
 class ControlPage extends StatefulWidget {
   final String title;
@@ -32,22 +33,34 @@ class _ControlPageState extends State<ControlPage> {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: Icons.lightbulb, label: 'POWER'),
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        // activeCardColor = inactiveCardColor
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PowerPage()));
+                      },
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: Icons.lightbulb, label: 'POWER'),
+                      ),
                     ),
-                    ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: Icons.water, label: 'WATER',),
+                    GestureDetector(
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: Icons.water, label: 'WATER',),
+                      ),
                     ),
-                    ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: Icons.circle_outlined, label: 'OXYGEN',),
+                    GestureDetector(
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: Icons.circle_outlined, label: 'OXYGEN',),
+                      ),
                     ),
-                    ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: Icons.thermostat, label: 'TEMP',),
+                    GestureDetector(
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: Icons.thermostat, label: 'TEMP',),
+                      ),
                     ),
                   ],
                 ),
@@ -58,20 +71,22 @@ class _ControlPageState extends State<ControlPage> {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const[
-                    ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: FontAwesomeIcons.fish, label: 'FISH',),
+                  children: [
+                    GestureDetector(
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: FontAwesomeIcons.fish, label: 'FISH',),
+                      ),
                     ),
-                    ControllerCard(
+                    const ControllerCard(
                       bgColor: activeCardColor,
                       cardChild: IconContent(icon: Icons.food_bank, label: 'FOOD',),
                     ),
-                    ControllerCard(
+                    const ControllerCard(
                       bgColor: activeCardColor,
                       cardChild: IconContent(icon: Icons.water_drop, label: 'PH',),
                     ),
-                    ControllerCard(
+                    const ControllerCard(
                       bgColor: activeCardColor,
                       cardChild: IconContent(icon: Icons.air, label: 'AIR',),
                     ),

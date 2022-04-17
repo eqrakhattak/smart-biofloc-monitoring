@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 
+const iconContentColor = Color(0xFFE0F7FA);
+const iconSize = 35.0;
+const labelTextStyle = TextStyle(
+  color: iconContentColor,
+  fontSize: 20.0,
+  fontFamily: 'Cabin',
+  fontWeight: FontWeight.bold,
+  letterSpacing: 2.5,
+);
+
 
 class IconContent extends StatelessWidget {
   final IconData icon;
@@ -13,18 +23,12 @@ class IconContent extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 35.0,
-          color: const Color(0xFFE0F7FA),
+          size: iconSize,
+          color: iconContentColor,
         ),
         Text(
           label,
-          style: const TextStyle(
-            color: Color(0xFFE0F7FA),
-            fontSize: 20.0,
-            fontFamily: 'Cabin',
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2.5,
-          ),
+          style: labelTextStyle,
         ),
       ],
     );
