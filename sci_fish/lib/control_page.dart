@@ -1,46 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'controller_card.dart';
+import 'icon_content.dart';
+
+const Color activeCardColor = Color(0xFF0097A7);
 
 class ControlPage extends StatefulWidget {
-  const ControlPage({Key? key, required this.title}) : super(key: key);
-
   final String title;
+  const ControlPage({Key? key, required this.title}) : super(key: key);
 
   @override
   State<ControlPage> createState() => _ControlPageState();
 }
 
 class _ControlPageState extends State<ControlPage> {
-
-  Card buildCard({required IconData icon, required String text}){
-    return Card(
-      color: Colors.cyan[700],
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                icon,
-                size: 35.0,
-                color: Colors.white,
-              ),
-              Text(
-                text,
-                style: TextStyle(
-                  color: Colors.cyan[50],
-                  fontSize: 20.0,
-                  fontFamily: 'Cabin',
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.5,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,18 +25,30 @@ class _ControlPageState extends State<ControlPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildCard(icon: Icons.lightbulb, text: 'POWER'),
-                    buildCard(icon: Icons.water, text: 'WATER'),
-                    buildCard(icon: Icons.circle_outlined, text: 'OXYGEN'),
-                    buildCard(icon: Icons.thermostat, text: 'TEMP'),
+                  children: const [
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: Icons.lightbulb, label: 'POWER'),
+                    ),
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: Icons.water, label: 'WATER',),
+                    ),
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: Icons.circle_outlined, label: 'OXYGEN',),
+                    ),
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: Icons.thermostat, label: 'TEMP',),
+                    ),
                   ],
                 ),
               ),
@@ -73,11 +58,23 @@ class _ControlPageState extends State<ControlPage> {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildCard(icon: Icons.home, text: 'FISH'),
-                    buildCard(icon: Icons.food_bank, text: 'FOOD'),
-                    buildCard(icon: Icons.home, text: 'PH'),
-                    buildCard(icon: Icons.air, text: 'AIR'),
+                  children: const[
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: FontAwesomeIcons.fish, label: 'FISH',),
+                    ),
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: Icons.food_bank, label: 'FOOD',),
+                    ),
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: Icons.water_drop, label: 'PH',),
+                    ),
+                    ControllerCard(
+                      bgColor: activeCardColor,
+                      cardChild: IconContent(icon: Icons.air, label: 'AIR',),
+                    ),
                   ],
                 ),
               ),
@@ -88,3 +85,6 @@ class _ControlPageState extends State<ControlPage> {
     );
   }
 }
+
+
+
