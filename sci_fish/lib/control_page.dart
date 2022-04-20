@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'controller_card.dart';
 import 'icon_content.dart';
 import 'power_page.dart';
+
 const Color activeCardColor = Color(0xFF0097A7);
 const Color inactiveCardColor = Color(0xFF00ACC1);
 
@@ -19,10 +20,8 @@ class _ControlPageState extends State<ControlPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[300],
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.cyan[700],
       ),
       body: SafeArea(
         child: Padding(

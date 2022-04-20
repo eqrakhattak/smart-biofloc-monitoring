@@ -8,11 +8,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ControlPage(title: 'SciFish'),
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.cyan,
+        colorScheme: const ColorScheme.light().copyWith(primary: Colors.cyan[700],),   //replacement for PrimaryColor
+        scaffoldBackgroundColor: Colors.cyan[300]
+      ),
+      home: const ControlPage(title: 'SciFish'),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //
