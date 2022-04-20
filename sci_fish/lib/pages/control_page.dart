@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'controller_card.dart';
-import 'icon_content.dart';
+import 'package:sci_fish/pages/air_page.dart';
+import 'package:sci_fish/pages/fish_page.dart';
+import 'package:sci_fish/pages/food_page.dart';
+import 'package:sci_fish/pages/oxygen_page.dart';
+import 'package:sci_fish/pages/ph_page.dart';
+import 'package:sci_fish/pages/temp_page.dart';
+import 'package:sci_fish/pages/water_page.dart';
+import '../components/controller_card.dart';
+import '../components/icon_content.dart';
 import 'power_page.dart';
 
 const Color activeCardColor = Color(0xFF0097A7);
@@ -36,7 +43,7 @@ class _ControlPageState extends State<ControlPage> {
                     GestureDetector(
                       onTap: (){
                         // activeCardColor = inactiveCardColor
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PowerPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const PowerPage()));
                       },
                       child: const ControllerCard(
                         bgColor: activeCardColor,
@@ -44,18 +51,27 @@ class _ControlPageState extends State<ControlPage> {
                       ),
                     ),
                     GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const WaterPage()));
+                      },
                       child: const ControllerCard(
                         bgColor: activeCardColor,
                         cardChild: IconContent(icon: Icons.water, label: 'WATER',),
                       ),
                     ),
                     GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const OxygenPage()));
+                      },
                       child: const ControllerCard(
                         bgColor: activeCardColor,
                         cardChild: IconContent(icon: Icons.circle_outlined, label: 'OXYGEN',),
                       ),
                     ),
                     GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const TemperaturePage()));
+                      },
                       child: const ControllerCard(
                         bgColor: activeCardColor,
                         cardChild: IconContent(icon: Icons.thermostat, label: 'TEMP',),
@@ -72,22 +88,40 @@ class _ControlPageState extends State<ControlPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const FishPage()));
+                      },
                       child: const ControllerCard(
                         bgColor: activeCardColor,
                         cardChild: IconContent(icon: FontAwesomeIcons.fish, label: 'FISH',),
                       ),
                     ),
-                    const ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: Icons.food_bank, label: 'FOOD',),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodPage()));
+                      },
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: Icons.food_bank, label: 'FOOD',),
+                      ),
                     ),
-                    const ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: Icons.water_drop, label: 'PH',),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const PhPage()));
+                      },
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: Icons.water_drop, label: 'PH',),
+                      ),
                     ),
-                    const ControllerCard(
-                      bgColor: activeCardColor,
-                      cardChild: IconContent(icon: Icons.air, label: 'AIR',),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AirPage()));
+                      },
+                      child: const ControllerCard(
+                        bgColor: activeCardColor,
+                        cardChild: IconContent(icon: Icons.air, label: 'AIR',),
+                      ),
                     ),
                   ],
                 ),

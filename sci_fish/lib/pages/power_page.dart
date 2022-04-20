@@ -9,7 +9,7 @@ class PowerPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Power'),
       ),
-      body: const Text('Hello'),
+      body: const Text('Hello Power'),
     );
   }
 }
