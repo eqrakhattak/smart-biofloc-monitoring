@@ -42,6 +42,7 @@ class _ControlPageState extends State<ControlPage> {
                   children: [
                     GestureDetector(
                       onTap: (){
+                        // TODO: Add color change on tap.
                         // activeCardColor = inactiveCardColor
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const PowerPage()));
                       },
