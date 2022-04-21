@@ -34,6 +34,7 @@ class _ControlPageState extends State<ControlPage> {
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           child: Row(
+            //TODO: Formatting in landscape
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
