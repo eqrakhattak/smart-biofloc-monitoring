@@ -6,6 +6,7 @@ const Color iconColorOff = Color(0xFFF37790);
 
 class PowerPage extends StatelessWidget {
   const PowerPage({Key? key}) : super(key: key);
+  // var borderrRadius = const BorderRadius.only(topRight: Radius.circular(32), bottomRight: Radius.circular(32));
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +29,17 @@ class PowerPage extends StatelessWidget {
               const SizedBox(
                 height: 10.0,
               ),
-              const ListTile(
+              ListTile(
                 tileColor: Colors.white,
-                title: Text('CCTV ON/OFF'),
+                title: const Text('CCTV ON/OFF'),
                 trailing: Icon(Icons.power_settings_new),
                 iconColor: iconColorOn,
+                // style: ListTileStyle(
+                //
+                // ),
+                // shape: ,
+                //RoundedRectangleBorder(borderRadius: borderrRadius,),
+                onTap: () => print('Camara ON'),
               ),
               const SizedBox(
                 height: 10.0,
@@ -41,7 +48,9 @@ class PowerPage extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   color: Colors.black12,
-                  child: const Text('The CCTV Footage HERE'),
+                  child: const Center(
+                    child: Text('The CCTV Footage HERE'),
+                  ),
                 ),
               ),
             ],
