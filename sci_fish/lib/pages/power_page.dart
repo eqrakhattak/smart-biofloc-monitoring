@@ -30,7 +30,6 @@ class PowerPage extends StatelessWidget {
               ),
               const ListTile(
                 tileColor: Colors.white,
-                
                 title: Text('CCTV ON/OFF'),
                 trailing: Icon(Icons.power_settings_new),
                 iconColor: iconColorOn,
