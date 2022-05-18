@@ -51,60 +51,55 @@ class FoodPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: Table(
+                    border: TableBorder.all(),
                     children: [
-                      TableRow(
+                      const TableRow(
                         children: [
                           TableCell(
-                            child: Container(
-                              child: const Text('Selector Matrix'),
+                            child: SizedBox(
+                              child: Center(child: Text('Selector Matrix')),
                               height: 32,
                               width: 32,
-                              color: Colors.red,
                             ),
                           ),
                           TableCell(
-                            child: Container(
-                              child: const Text('20'),
+                            child: SizedBox(
+                              child: Center(child: Text('20')),
                               height: 32,
                               width: 32,
-                              color: Colors.yellow,
                             ),
                           ),
                           TableCell(
-                            child: Container(
-                              child: const Text('200'),
+                            child: SizedBox(
+                              child: Center(child: Text('200')),
                               height: 32,
                               width: 32,
-                              color: Colors.green,
                             ),
                           ),
                         ]
                       ),
-                      TableRow(
+                       const TableRow(
                           children: [
                             TableCell(
-                              child: Container(
-                                child: const Text('Pallet Size'),
+                              child: SizedBox(
+                                child: Center(child: Text('Pallet Size')),
                                 height: 32,
                                 width: 32,
-                                color: Colors.red,
                               ),
                             ),
                             TableCell(
-                              child: Container(
-                                child: const Text('800'),
+                              child: SizedBox(
+                                child: Center(child: Text('800')),
                                 //TODO: put in micro meter
                                 height: 32,
                                 width: 32,
-                                color: Colors.yellow,
                               ),
                             ),
                             TableCell(
-                              child: Container(
-                                child: const Text('4mm'),
+                              child: SizedBox(
+                                child: Center(child: Text('4mm')),
                                 height: 32,
                                 width: 32,
-                                color: Colors.green,
                               ),
                             ),
                           ]
@@ -121,7 +116,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
-                                child: const Text('Selector Matrix'),
+                                child: const Text('> 10g'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.yellow,
@@ -129,6 +124,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
+                                child: const Text('< 5kg'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.green,
@@ -140,6 +136,7 @@ class FoodPage extends StatelessWidget {
                           children: [
                             TableCell(
                               child: Container(
+                                child: const Text('Blower'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.red,
@@ -147,6 +144,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
+                                child: const Text('5.5kW'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.yellow,
@@ -154,6 +152,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
+                                child: const Text('7.5kW'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.green,
@@ -165,6 +164,7 @@ class FoodPage extends StatelessWidget {
                           children: [
                             TableCell(
                               child: Container(
+                                child: const Text('Doses By Day'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.red,
@@ -172,6 +172,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
+                                child: const Text('2'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.yellow,
@@ -179,6 +180,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
+                                child: const Text('3'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.green,
@@ -190,6 +192,7 @@ class FoodPage extends StatelessWidget {
                           children: [
                             TableCell(
                               child: Container(
+                                child: const Text('Number of Silos'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.red,
@@ -197,6 +200,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
+                                child: const Text('1'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.yellow,
@@ -204,31 +208,7 @@ class FoodPage extends StatelessWidget {
                             ),
                             TableCell(
                               child: Container(
-                                height: 32,
-                                width: 32,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ]
-                      ),
-                      TableRow(
-                          children: [
-                            TableCell(
-                              child: Container(
-                                height: 32,
-                                width: 32,
-                                color: Colors.red,
-                              ),
-                            ),
-                            TableCell(
-                              child: Container(
-                                height: 32,
-                                width: 32,
-                                color: Colors.yellow,
-                              ),
-                            ),
-                            TableCell(
-                              child: Container(
+                                child: const Text('2'),
                                 height: 32,
                                 width: 32,
                                 color: Colors.green,
