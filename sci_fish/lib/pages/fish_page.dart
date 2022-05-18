@@ -26,6 +26,7 @@ class FishPage extends StatelessWidget {
                     color: textColor,
                   ),
                 ),
+                //TODO: add textfield to enter the number of fishes dead or alive
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(color: Color(0xFF10898d), width: 2),
                   borderRadius: BorderRadius.circular(10),
@@ -68,6 +69,7 @@ class FishPage extends StatelessWidget {
                     width: double.infinity,
                     color: Colors.white12,
                     child: const Center(
+                      //TODO: Add graph in here
                       child: Text(
                         'The Temperature Graph HERE',
                         style: TextStyle(
