@@ -10,9 +10,7 @@ import 'package:sci_fish/pages/water_page.dart';
 import '../components/controller_card.dart';
 import '../components/icon_content.dart';
 import 'power_page.dart';
-
-const Color activeCardColor = Color(0xFF0097A7);
-const Color inactiveCardColor = Color(0xFF00ACC1);
+import 'package:sci_fish/constants.dart';
 
 class ControlPage extends StatefulWidget {
   final String title;
