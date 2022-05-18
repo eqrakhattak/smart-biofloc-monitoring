@@ -12,7 +12,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         colorScheme: const ColorScheme.light().copyWith(primary: Colors.cyan[700],),   //replacement for PrimaryColor
-        scaffoldBackgroundColor: Colors.cyan[300]
+        scaffoldBackgroundColor: Colors.cyan[300],
+        splashColor: const Color(0xFF046169),
+        highlightColor: const Color(0xFF10898d),
       ),
       home: const ControlPage(title: 'SciFish'),
     );

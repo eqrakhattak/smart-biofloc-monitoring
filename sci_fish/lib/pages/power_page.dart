@@ -36,7 +36,6 @@ class PowerPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 onTap: () => print('Power ON'),
-                //TODO: Change tap color to teal
                 //TODO: Add OnTap functionality
               ),
               const Padding(
