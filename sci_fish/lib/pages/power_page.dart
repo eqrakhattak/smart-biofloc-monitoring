@@ -19,37 +19,45 @@ class PowerPage extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              const ListTile(
-                tileColor: Colors.white,
-                // leading: FlutterLogo(),
-                title: Text('Farm Power ON/OFF'),
-                trailing: Icon(Icons.power_settings_new),
-                iconColor: iconColorOff,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50.0),
+                child: const ListTile(
+                  // leading: FlutterLogo(),
+                  title: Text('Farm Power ON/OFF'),
+                  trailing: Icon(Icons.power_settings_new),
+                  iconColor: iconColorOff,
+                  tileColor: Colors.white,
+                ),
               ),
               const SizedBox(
                 height: 10.0,
               ),
-              ListTile(
-                tileColor: Colors.white,
-                title: const Text('CCTV ON/OFF'),
-                trailing: Icon(Icons.power_settings_new),
-                iconColor: iconColorOn,
-                // style: ListTileStyle(
-                //
-                // ),
-                // shape: ,
-                //RoundedRectangleBorder(borderRadius: borderrRadius,),
-                onTap: () => print('Camara ON'),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: ListTile(
+
+                  title: const Text('CCTV ON/OFF'),
+                  trailing: Icon(Icons.power_settings_new),
+                  iconColor: iconColorOn,
+                  // style: 'Cabin',
+                  // shape: ,
+                  //RoundedRectangleBorder(borderRadius: borderrRadius,),
+                  tileColor: Colors.white,
+                  onTap: () => print('Camara ON'),
+                ),
               ),
               const SizedBox(
                 height: 10.0,
               ),
               Expanded(
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.black12,
-                  child: const Center(
-                    child: Text('The CCTV Footage HERE'),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.black12,
+                    child: const Center(
+                      child: Text('The CCTV Footage HERE'),
+                    ),
                   ),
                 ),
               ),
