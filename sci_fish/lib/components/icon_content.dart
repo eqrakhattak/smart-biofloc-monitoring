@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sci_fish/constants.dart';
 
-const iconContentColor = Color(0xFFE0F7FA);
 const iconSize = 35.0;
 const labelTextStyle = TextStyle(
   color: iconContentColor,

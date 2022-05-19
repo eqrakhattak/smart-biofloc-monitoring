@@ -17,23 +17,27 @@ class FoodPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 5.0,
+                height: 10.0,
               ),
-              ListTile(
-                title: const Text(
-                  'Fish Feeder ON/OFF',
-                  style: TextStyle(
-                    color: textColor,
+              Material(
+                elevation: 18,
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  title: const Text(
+                    'Fish Feeder ON/OFF',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
                   ),
+                  trailing: const Icon(Icons.power_settings_new),
+                  iconColor: colorOff,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  onTap: () => print('Feeder Off'),
+                  //TODO: Add OnTap functionality
                 ),
-                trailing: const Icon(Icons.power_settings_new),
-                iconColor: colorOff,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                onTap: () => print('Feerer Off'),
-                //TODO: Add OnTap functionality
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 5.0, top: 3.0),
@@ -45,179 +49,202 @@ class FoodPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 40.0,
+                height: 70.0,
               ),
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Table(
-                    border: TableBorder.all(),
-                    children: [
-                      const TableRow(
+              const Text(
+                'Food Info:',
+                style: TextStyle(
+                  fontSize: 17.0,
+                  color: textColor,
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Table(
+                  border: TableBorder.symmetric(outside: BorderSide.none, inside: const BorderSide(width: 1, color: activeCardColor, style: BorderStyle.solid),),
+                  children:  [
+                    TableRow(
+                        children: [
+                          TableCell(
+                            child: Container(
+                              child: const Center(child: Text('    ')),
+                              height: 32,
+                              width: 32,
+                              color: activeCardColor,
+                            ),
+                          ),
+                          TableCell(
+                            child: Container(
+                              child: const Center(child: Text('Min', style: TextStyle(fontWeight: FontWeight.bold, color: iconContentColor),),),
+                              height: 32,
+                              width: 32,
+                              color: activeCardColor,
+                            ),
+                          ),
+                          TableCell(
+                            child: Container(
+                              child: const Center(child: Text('Max', style: TextStyle(fontWeight: FontWeight.bold, color: iconContentColor),),),
+                              height: 32,
+                              width: 32,
+                              color: activeCardColor,
+                            ),
+                          ),
+                        ]
+                    ),
+                    const TableRow(
+                      children: [
+                        TableCell(
+                          child: SizedBox(
+                            child: Center(child: Text('Selector Matrix', style: TextStyle(color: textColor),),),
+                            height: 32,
+                            width: 32,
+                          ),
+                        ),
+                        TableCell(
+                          child: SizedBox(
+                            child: Center(child: Text('20', style: TextStyle(color: textColor),),),
+                            height: 32,
+                            width: 32,
+                          ),
+                        ),
+                        TableCell(
+                          child: SizedBox(
+                            child: Center(child: Text('200', style: TextStyle(color: textColor),),),
+                            height: 32,
+                            width: 32,
+                          ),
+                        ),
+                      ]
+                    ),
+                    const TableRow(
                         children: [
                           TableCell(
                             child: SizedBox(
-                              child: Center(child: Text('Selector Matrix')),
+                              child: Center(child: Text('Pallet Size', style: TextStyle(color: textColor),),),
                               height: 32,
                               width: 32,
                             ),
                           ),
                           TableCell(
                             child: SizedBox(
-                              child: Center(child: Text('20')),
+                              child: Center(child: Text('800µm', style: TextStyle(color: textColor),),),
                               height: 32,
                               width: 32,
                             ),
                           ),
                           TableCell(
                             child: SizedBox(
-                              child: Center(child: Text('200')),
+                              child: Center(child: Text('4mm', style: TextStyle(color: textColor),),),
                               height: 32,
                               width: 32,
                             ),
                           ),
                         ]
-                      ),
-                       const TableRow(
-                          children: [
-                            TableCell(
-                              child: SizedBox(
-                                child: Center(child: Text('Pallet Size')),
-                                height: 32,
-                                width: 32,
-                              ),
+                    ),
+                    const TableRow(
+                        children: [
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('Individual Dose', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: SizedBox(
-                                child: Center(child: Text('800')),
-                                //TODO: put in micro meter
-                                height: 32,
-                                width: 32,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('> 10g', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: SizedBox(
-                                child: Center(child: Text('4mm')),
-                                height: 32,
-                                width: 32,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('< 5kg', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                          ]
-                      ),
-                      TableRow(
-                          children: [
-                            TableCell(
-                              child: Container(
-                                child: const Text('Individual Dose'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.red,
-                              ),
+                          ),
+                        ]
+                    ),
+                    const TableRow(
+                        children: [
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('Blower', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('> 10g'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.yellow,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('5.5kW', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('< 5kg'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.green,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('7.5kW', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                          ]
-                      ),
-                      TableRow(
-                          children: [
-                            TableCell(
-                              child: Container(
-                                child: const Text('Blower'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.red,
-                              ),
+                          ),
+                        ]
+                    ),
+                    const TableRow(
+                        children: [
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('Doses By Day', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('5.5kW'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.yellow,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('2', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('7.5kW'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.green,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('3', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                          ]
-                      ),
-                      TableRow(
-                          children: [
-                            TableCell(
-                              child: Container(
-                                child: const Text('Doses By Day'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.red,
-                              ),
+                          ),
+                        ]
+                    ),
+                    const TableRow(
+                        children: [
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('Number of Silos', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('2'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.yellow,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('1', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('3'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.green,
-                              ),
+                          ),
+                          TableCell(
+                            child: SizedBox(
+                              child: Center(child: Text('2', style: TextStyle(color: textColor),),),
+                              height: 32,
+                              width: 32,
                             ),
-                          ]
-                      ),
-                      TableRow(
-                          children: [
-                            TableCell(
-                              child: Container(
-                                child: const Text('Number of Silos'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.red,
-                              ),
-                            ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('1'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.yellow,
-                              ),
-                            ),
-                            TableCell(
-                              child: Container(
-                                child: const Text('2'),
-                                height: 32,
-                                width: 32,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ]
-                      ),
-                    ],
-                  ),
+                          ),
+                        ]
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -227,17 +254,3 @@ class FoodPage extends StatelessWidget {
     );
   }
 }
-
-// Container(
-// width: double.infinity,
-// color: Colors.white12,
-// child: const Center(
-// //TODO: Add graph in here
-// child: Text(
-// 'The Temperature Graph HERE',
-// style: TextStyle(
-// color: textColor,
-// ),
-// ),
-// ),
-// ),
