@@ -22,24 +22,30 @@ class PowerPage extends StatelessWidget {
               const SizedBox(
                 height: 5.0,
               ),
-              ListTile(
-                title: const Text(
-                    'Farm Power ON/OFF',
-                  style: TextStyle(
-                    color: textColor,
+              Material(
+                color: Colors.cyan[300],
+                elevation: 4,
+                borderRadius: BorderRadius.circular(10),
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  title: const Text(
+                      'Farm Power ON/OFF',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
                   ),
+                  trailing: const Icon(Icons.power_settings_new),
+                  iconColor: colorOn,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  onTap: () => print('Power ON'),
+                  //TODO: Add OnTap functionality
                 ),
-                trailing: const Icon(Icons.power_settings_new),
-                iconColor: colorOn,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                onTap: () => print('Power ON'),
-                //TODO: Add OnTap functionality
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 5.0, top: 3.0),
+                padding: EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
                     'Power is ON',
                   style: TextStyle(
@@ -50,23 +56,29 @@ class PowerPage extends StatelessWidget {
               const SizedBox(
                 height: 25.0,
               ),
-              ListTile(
-                title: const Text(
-                    'CCTV ON/OFF',
-                  style: TextStyle(
-                    color: textColor,
+              Material(
+                color: Colors.cyan[300],
+                elevation: 4,
+                borderRadius: BorderRadius.circular(10),
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  title: const Text(
+                      'CCTV ON/OFF',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
                   ),
+                  trailing: const Icon(Icons.power_settings_new),
+                  iconColor: colorOff,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  onTap: () => print('Camara Off'),
                 ),
-                trailing: const Icon(Icons.power_settings_new),
-                iconColor: colorOff,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                onTap: () => print('Camara Off'),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 5.0, top: 3.0),
+                padding: EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
                     'Camera is OFF',
                   style: TextStyle(

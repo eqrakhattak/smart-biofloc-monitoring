@@ -20,7 +20,9 @@ class FoodPage extends StatelessWidget {
                 height: 10.0,
               ),
               Material(
-                elevation: 18,
+                color: Colors.cyan[300],
+                elevation: 4,
+                borderRadius: BorderRadius.circular(10),
                 shadowColor: Colors.blue,
                 child: ListTile(
                   title: const Text(
@@ -40,7 +42,7 @@ class FoodPage extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 5.0, top: 3.0),
+                padding: EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
                   'Feeder is OFF',
                   style: TextStyle(

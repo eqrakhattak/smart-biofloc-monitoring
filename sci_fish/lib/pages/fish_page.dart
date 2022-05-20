@@ -19,34 +19,46 @@ class FishPage extends StatelessWidget {
               const SizedBox(
                 height: 5.0,
               ),
-              ListTile(
-                title: const Text(
-                  'Alive Fish',
-                  style: TextStyle(
-                    color: textColor,
+              Material(
+                color: Colors.cyan[300],
+                elevation: 4,
+                borderRadius: BorderRadius.circular(10),
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  title: const Text(
+                    'Alive Fish',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
                   ),
+                  //TODO: add textfield to enter the number of fishes dead or alive
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  //TODO: Change tap color to teal
+                  //TODO: Add OnTap functionality
                 ),
-                //TODO: add textfield to enter the number of fishes dead or alive
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                //TODO: Change tap color to teal
-                //TODO: Add OnTap functionality
               ),
               const SizedBox(
                 height: 10.0,
               ),
-              ListTile(
-                title: const Text(
-                  'Dead Fish',
-                  style: TextStyle(
-                    color: textColor,
+              Material(
+                color: Colors.cyan[300],
+                elevation: 4,
+                borderRadius: BorderRadius.circular(10),
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  title: const Text(
+                    'Dead Fish',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
                   ),
-                ),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                  borderRadius: BorderRadius.circular(10),
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -71,7 +83,7 @@ class FishPage extends StatelessWidget {
                     child: const Center(
                       //TODO: Add graph in here
                       child: Text(
-                        'The Temperature Graph HERE',
+                        'The Mortality Graph HERE',
                         style: TextStyle(
                           color: textColor,
                         ),
