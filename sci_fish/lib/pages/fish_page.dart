@@ -36,7 +36,6 @@ class FishPage extends StatelessWidget {
                     side: const BorderSide(color: Color(0xFF10898d), width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  //TODO: Change tap color to teal
                   //TODO: Add OnTap functionality
                 ),
               ),

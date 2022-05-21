@@ -17,7 +17,7 @@ class FoodPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 10.0,
+                height: 5.0,
               ),
               Material(
                 color: Colors.cyan[300],
@@ -47,6 +47,48 @@ class FoodPage extends StatelessWidget {
                   'Feeder is OFF',
                   style: TextStyle(
                     color: colorOff,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Material(
+                color: Colors.cyan[300],
+                elevation: 4,
+                borderRadius: BorderRadius.circular(10),
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  title: const Text(
+                    'Current Dose',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Material(
+                color: Colors.cyan[300],
+                elevation: 4,
+                borderRadius: BorderRadius.circular(10),
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  title: const Text(
+                    'Dose Interval',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
@@ -157,14 +199,14 @@ class FoodPage extends StatelessWidget {
                           ),
                           TableCell(
                             child: SizedBox(
-                              child: Center(child: Text('> 10g', style: TextStyle(color: textColor),),),
+                              child: Center(child: Text('> 1g', style: TextStyle(color: textColor),),),
                               height: 32,
                               width: 32,
                             ),
                           ),
                           TableCell(
                             child: SizedBox(
-                              child: Center(child: Text('< 5kg', style: TextStyle(color: textColor),),),
+                              child: Center(child: Text('< 100g', style: TextStyle(color: textColor),),),
                               height: 32,
                               width: 32,
                             ),
