@@ -8,7 +8,7 @@ class FishPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fish'),
+        title: const Text('Fish Life'),
       ),
       body: SafeArea(
         child: Padding(

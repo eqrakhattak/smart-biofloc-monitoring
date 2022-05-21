@@ -8,7 +8,7 @@ class FoodPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fish'),
+        title: const Text('Food'),
       ),
       body: SafeArea(
         child: Padding(
