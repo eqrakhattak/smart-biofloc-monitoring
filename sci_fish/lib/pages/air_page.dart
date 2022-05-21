@@ -4,6 +4,8 @@ import 'package:sci_fish/constants.dart';
 class AirPage extends StatelessWidget {
   const AirPage({Key? key}) : super(key: key);
 
+  static const String id = 'air_page';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

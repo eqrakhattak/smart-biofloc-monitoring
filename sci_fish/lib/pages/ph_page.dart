@@ -4,6 +4,8 @@ import 'package:sci_fish/constants.dart';
 class PhPage extends StatelessWidget {
   const PhPage({Key? key}) : super(key: key);
 
+  static const String id = 'pH_page';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

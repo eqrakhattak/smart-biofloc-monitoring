@@ -13,6 +13,7 @@ import 'power_page.dart';
 import 'package:sci_fish/constants.dart';
 
 class ControlPage extends StatefulWidget {
+  static const String id = 'control_page';
   final String title;
   const ControlPage({Key? key, required this.title}) : super(key: key);
 

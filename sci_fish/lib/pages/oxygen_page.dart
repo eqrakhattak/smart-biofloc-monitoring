@@ -4,6 +4,8 @@ import 'package:sci_fish/constants.dart';
 class OxygenPage extends StatelessWidget {
   const OxygenPage({Key? key}) : super(key: key);
 
+  static const String id = 'oxygen_page';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +132,7 @@ class OxygenPage extends StatelessWidget {
                 height: 15.0,
               ),
               const Text(
-                'Oxygen Level w.r.t Temprature:',
+                'Oxygen Level w.r.t Temperature:',
                 style: TextStyle(
                   fontSize: 17.0,
                   color: textColor,

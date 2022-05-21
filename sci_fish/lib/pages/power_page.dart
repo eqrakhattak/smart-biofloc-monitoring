@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 
-// Color(0xFF00DEB1)
-// Color(0xFFF37790)
 class PowerPage extends StatelessWidget {
   const PowerPage({Key? key}) : super(key: key);
+
+  static const String id = 'power_page';
 
   @override
   Widget build(BuildContext context) {

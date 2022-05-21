@@ -4,6 +4,8 @@ import 'package:sci_fish/constants.dart';
 class FishPage extends StatelessWidget {
   const FishPage({Key? key}) : super(key: key);
 
+  static const String id = 'fish_page';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

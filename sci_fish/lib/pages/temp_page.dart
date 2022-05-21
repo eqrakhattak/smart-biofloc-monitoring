@@ -4,6 +4,8 @@ import 'package:sci_fish/constants.dart';
 class TemperaturePage extends StatelessWidget {
   const TemperaturePage({Key? key}) : super(key: key);
 
+  static const String id = 'temperature_page';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
