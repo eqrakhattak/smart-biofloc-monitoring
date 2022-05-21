@@ -57,16 +57,41 @@ class WaterPage extends StatelessWidget {
                 flex: 1,
                 child: ListTile(
                   title: const Text(
-                    'Water Tank Status',
+                    'Water Level Status',     //water tank status
                     style: TextStyle(
                       color: textColor,
                     ),
                   ),
                   subtitle: const Text(
-                    'OK',
+                    'HIGH',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: colorOn,
+                      fontSize: 33.0,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Expanded(
+                flex: 1,
+                child: ListTile(
+                  title: const Text(
+                    'Water Volume',
+                    style: TextStyle(
+                      color: textColor,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    '880L',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
                       fontSize: 33.0,
                       //TODO: edit textsize according to expanded
                     ),
@@ -93,7 +118,6 @@ class WaterPage extends StatelessWidget {
                     '56cm',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      // color: colorOn,
                       fontSize: 33.0,
                     ),
                   ),
@@ -114,7 +138,7 @@ class WaterPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 15.0,
+                height: 10.0,
               ),
               Expanded(
                 flex: 2,

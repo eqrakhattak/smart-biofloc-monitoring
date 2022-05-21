@@ -51,56 +51,50 @@ class AirPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 15.0,
+                height: 20.0,
               ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Air Pump Status',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
+              ListTile(
+                title: const Text(
+                  'Air Pump Status',
+                  style: TextStyle(
+                    color: textColor,
                   ),
-                  subtitle: const Text(
-                    'OK',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: colorOn,
-                      fontSize: 33.0,
-                      //TODO: edit textsize according to expanded
-                    ),
+                ),
+                subtitle: const Text(
+                  'OK',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: colorOn,
+                    fontSize: 33.0,
+                    //TODO: edit textsize according to expanded
                   ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                ),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
               const SizedBox(
                 height: 10.0,
               ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Air Pressure',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
+              ListTile(
+                title: const Text(
+                  'Air Pressure',
+                  style: TextStyle(
+                    color: textColor,
                   ),
-                  subtitle: const Text(
-                    '800Pa',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      // color: colorOn,
-                      fontSize: 33.0,
-                    ),
+                ),
+                subtitle: const Text(
+                  '800Pa',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    // color: colorOn,
+                    fontSize: 33.0,
                   ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                ),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ],
