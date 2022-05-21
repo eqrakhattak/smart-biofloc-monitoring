@@ -44,7 +44,7 @@ class _ControlPageState extends State<ControlPage> {
                         onTap: (){
                           // TODO: Add color change on tap.
                           // activeCardColor = inactiveCardColor
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const PowerPage()));
+                          Navigator.pushNamed(context, '/first');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,
@@ -55,7 +55,7 @@ class _ControlPageState extends State<ControlPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const WaterPage()));
+                          Navigator.pushNamed(context, '/second');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,
@@ -66,7 +66,7 @@ class _ControlPageState extends State<ControlPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const OxygenPage()));
+                          Navigator.pushNamed(context, '/third');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,
@@ -77,7 +77,7 @@ class _ControlPageState extends State<ControlPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const TemperaturePage()));
+                          Navigator.pushNamed(context, '/forth');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,
@@ -95,7 +95,7 @@ class _ControlPageState extends State<ControlPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const FishPage()));
+                          Navigator.pushNamed(context, '/fifth');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,
@@ -106,7 +106,7 @@ class _ControlPageState extends State<ControlPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodPage()));
+                          Navigator.pushNamed(context, '/sixth');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,
@@ -117,7 +117,7 @@ class _ControlPageState extends State<ControlPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const PhPage()));
+                          Navigator.pushNamed(context, '/seventh');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,
@@ -128,7 +128,7 @@ class _ControlPageState extends State<ControlPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const AirPage()));
+                          Navigator.pushNamed(context, '/eighth');
                         },
                         child: const ControllerCard(
                           bgColor: activeCardColor,

@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sci_fish/pages/air_page.dart';
+import 'package:sci_fish/pages/fish_page.dart';
+import 'package:sci_fish/pages/food_page.dart';
+import 'package:sci_fish/pages/oxygen_page.dart';
+import 'package:sci_fish/pages/ph_page.dart';
+import 'package:sci_fish/pages/power_page.dart';
+import 'package:sci_fish/pages/temp_page.dart';
+import 'package:sci_fish/pages/water_page.dart';
 import 'pages/control_page.dart';
 
 void main() => runApp(const MyApp());
@@ -16,7 +24,18 @@ class MyApp extends StatelessWidget {
         splashColor: const Color(0xFF046169),
         highlightColor: const Color(0xFF10898d),
       ),
-      home: const ControlPage(title: 'SciFish'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const ControlPage(title: 'SciFish',),
+        '/first': (context) => const PowerPage(),
+        '/second': (context) => const WaterPage(),
+        '/third': (context) => const OxygenPage(),
+        '/forth': (context) => const TemperaturePage(),
+        '/fifth': (context) => const FishPage(),
+        '/sixth': (context) => const FoodPage(),
+        '/seventh': (context) => const PhPage(),
+        '/eighth': (context) => const AirPage(),
+      },
     );
   }
 }
