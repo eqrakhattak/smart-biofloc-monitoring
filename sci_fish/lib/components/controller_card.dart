@@ -15,6 +15,8 @@ class ControllerCard extends StatelessWidget {
           child: cardChild,
         ),
       ),
+      elevation: 4,
+      shadowColor: Colors.blue,
     );
   }
 }
