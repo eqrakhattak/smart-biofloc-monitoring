@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 
-class PhPage extends StatelessWidget {
+class PhPage extends StatefulWidget {
   const PhPage({Key? key}) : super(key: key);
 
   static const String id = 'pH_page';
+
+  @override
+  State<PhPage> createState() => _PhPageState();
+}
+
+class _PhPageState extends State<PhPage> {
+
+  bool switchSensor = false;
+  String sensorStatus = 'Sensor is OFF' ;
+  Color statusColor = colorOff;
 
   @override
   Widget build(BuildContext context) {
@@ -27,28 +37,39 @@ class PhPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 shadowColor: Colors.blue,
                 child: ListTile(
-                  title: const Text(
-                    'pH Sensor ON/OFF',
-                    style: TextStyle(
-                      color: textColor,
+                    title: const Text(
+                      'pH Sensor ON/OFF',
+                      style: TextStyle(
+                        color: textColor,
+                      ),
                     ),
-                  ),
-                  trailing: const Icon(Icons.power_settings_new),
-                  iconColor: colorOff,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  onTap: () => print('pH Off'),
-                  //TODO: Add OnTap functionality
+                    trailing: const Icon(Icons.power_settings_new),
+                    iconColor: statusColor,
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        if(switchSensor==true){
+                          switchSensor = false;
+                          sensorStatus = 'Sensor is Off';
+                          statusColor = colorOff;
+                        }else{
+                          switchSensor = true;
+                          sensorStatus = 'Sensor is On';
+                          statusColor = colorOn;
+                        }
+                      });
+                    }
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 5.0, top: 5.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
-                  'pH Sensor OFF',
+                  sensorStatus,
                   style: TextStyle(
-                    color: colorOff,
+                    color: statusColor,
                   ),
                 ),
               ),

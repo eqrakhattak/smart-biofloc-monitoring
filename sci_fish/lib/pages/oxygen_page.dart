@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 
-class OxygenPage extends StatelessWidget {
+class OxygenPage extends StatefulWidget {
   const OxygenPage({Key? key}) : super(key: key);
 
   static const String id = 'oxygen_page';
+
+  @override
+  State<OxygenPage> createState() => _OxygenPageState();
+}
+
+class _OxygenPageState extends State<OxygenPage> {
+
+  bool switchSensor = false;
+  String sensorStatus = 'Sensor is OFF' ;
+  Color statusColor = colorOff;
 
   @override
   Widget build(BuildContext context) {
@@ -34,21 +44,32 @@ class OxygenPage extends StatelessWidget {
                     ),
                   ),
                   trailing: const Icon(Icons.power_settings_new),
-                  iconColor: colorOff,
+                  iconColor: statusColor,
                   shape: RoundedRectangleBorder(
                     side: const BorderSide(color: Color(0xFF10898d), width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  onTap: () => print('Sensor Off'),
-                  //TODO: Add OnTap functionality
+                  onTap: () {
+                    setState(() {
+                      if(switchSensor==true){
+                        switchSensor = false;
+                        sensorStatus = 'Sensor is Off';
+                        statusColor = colorOff;
+                      }else{
+                        switchSensor = true;
+                        sensorStatus = 'Sensor is On';
+                        statusColor = colorOn;
+                      }
+                    });
+                  }
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 5.0, top: 5.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
-                  'Sensor is OFF',
+                  sensorStatus,
                   style: TextStyle(
-                    color: colorOff,
+                    color: statusColor,
                   ),
                 ),
               ),

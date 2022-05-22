@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 
-class PowerPage extends StatelessWidget {
+class PowerPage extends StatefulWidget {
   const PowerPage({Key? key}) : super(key: key);
 
   static const String id = 'power_page';
+
+  @override
+  State<PowerPage> createState() => _PowerPageState();
+}
+
+class _PowerPageState extends State<PowerPage> {
+
+  bool switchPower = false;
+  bool switchCam = false;
+  String powerStatus = 'Power is OFF';
+  String camStatus = 'Camera is OFF';
+  Color powerStatusColor = colorOff;
+  Color camStatusColor = colorOff;
 
   @override
   Widget build(BuildContext context) {
@@ -28,27 +41,38 @@ class PowerPage extends StatelessWidget {
                 shadowColor: Colors.blue,
                 child: ListTile(
                   title: const Text(
-                      'Farm Power ON/OFF',
+                    'Farm Power ON/OFF',
                     style: TextStyle(
                       color: textColor,
                     ),
                   ),
                   trailing: const Icon(Icons.power_settings_new),
-                  iconColor: colorOn,
+                  iconColor: powerStatusColor,
                   shape: RoundedRectangleBorder(
                     side: const BorderSide(color: Color(0xFF10898d), width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  onTap: () => print('Power ON'),
-                  //TODO: Add OnTap functionality
+                  onTap: () {
+                    setState(() {
+                      if(switchPower==true){
+                        switchPower = false;
+                        powerStatus = 'Power is Off';
+                        powerStatusColor = colorOff;
+                      }else{
+                        switchPower = true;
+                        powerStatus = 'Power is On';
+                        powerStatusColor = colorOn;
+                      }
+                    });
+                  },
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 5.0, top: 5.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
-                    'Power is ON',
+                  powerStatus,
                   style: TextStyle(
-                    color: colorOn,
+                    color: powerStatusColor,
                   ),
                 ),
               ),
@@ -62,26 +86,38 @@ class PowerPage extends StatelessWidget {
                 shadowColor: Colors.blue,
                 child: ListTile(
                   title: const Text(
-                      'CCTV ON/OFF',
+                    'CCTV ON/OFF',
                     style: TextStyle(
                       color: textColor,
                     ),
                   ),
                   trailing: const Icon(Icons.power_settings_new),
-                  iconColor: colorOff,
+                  iconColor: camStatusColor,
                   shape: RoundedRectangleBorder(
                     side: const BorderSide(color: Color(0xFF10898d), width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  onTap: () => print('Camara Off'),
+                  onTap: () {
+                    setState(() {
+                      if(switchCam==true){
+                        switchCam = false;
+                        camStatus = 'Camera is Off';
+                        camStatusColor = colorOff;
+                      }else{
+                        switchCam = true;
+                        camStatus = 'Camera is On';
+                        camStatusColor = colorOn;
+                      }
+                    });
+                  },
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
-                    'Camera is OFF',
+                  camStatus,
                   style: TextStyle(
-                    color: colorOff,
+                    color: camStatusColor,
                   ),
                 ),
               ),

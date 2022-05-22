@@ -12,6 +12,11 @@ class FoodPage extends StatefulWidget {
 
 class _FoodPageState extends State<FoodPage> {
 
+  // @override
+  // void initState(){
+  //   super.initState();
+  //
+  // }
   late String currentDose;
   late String doseInterval;
   bool switchFeeder = false;

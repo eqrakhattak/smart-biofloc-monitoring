@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 
-class TemperaturePage extends StatelessWidget {
+class TemperaturePage extends StatefulWidget {
   const TemperaturePage({Key? key}) : super(key: key);
 
   static const String id = 'temperature_page';
+
+  @override
+  State<TemperaturePage> createState() => _TemperaturePageState();
+}
+
+class _TemperaturePageState extends State<TemperaturePage> {
+
+  bool switchSensor = false;
+  String sensorStatus = 'Sensor is OFF' ;
+  Color statusColor = colorOff;
 
   @override
   Widget build(BuildContext context) {
@@ -28,27 +38,38 @@ class TemperaturePage extends StatelessWidget {
                 shadowColor: Colors.blue,
                 child: ListTile(
                   title: const Text(
-                    'Air Pump ON/OFF',
+                    'Temperature Sensor ON/OFF',
                     style: TextStyle(
                       color: textColor,
                     ),
                   ),
                   trailing: const Icon(Icons.power_settings_new),
-                  iconColor: colorOff,
+                  iconColor: statusColor,
                   shape: RoundedRectangleBorder(
                     side: const BorderSide(color: Color(0xFF10898d), width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  onTap: () => print('Air Pump Off'),
-                  //TODO: Add OnTap functionality
+                  onTap: () {
+                    setState(() {
+                      if(switchSensor==true){
+                        switchSensor = false;
+                        sensorStatus = 'Sensor is Off';
+                        statusColor = colorOff;
+                      }else{
+                        switchSensor = true;
+                        sensorStatus = 'Sensor is On';
+                        statusColor = colorOn;
+                      }
+                    });
+                  }
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 5.0, top: 5.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, top: 5.0),
                 child: Text(
-                  'Pump is OFF',
+                  sensorStatus,
                   style: TextStyle(
-                    color: colorOff,
+                    color: statusColor,
                   ),
                 ),
               ),
