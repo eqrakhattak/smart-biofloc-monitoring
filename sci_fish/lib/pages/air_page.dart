@@ -16,6 +16,29 @@ class _AirPageState extends State<AirPage> {
   String sensorStatus = 'Pump is OFF' ;
   Color statusColor = colorOff;
 
+  String pumpStatus = '_';
+  String airPressure = '_';
+
+  void switchAir(){
+    setState(() {
+      if(switchSensor==true){
+        switchSensor = false;
+        sensorStatus = 'Pump is OFF';
+        statusColor = colorOff;
+
+        pumpStatus = '_';
+        airPressure = '_';
+      }else{
+        switchSensor = true;
+        sensorStatus = 'Pump is ON';
+        statusColor = colorOn;
+
+        pumpStatus = 'OK';
+        airPressure = '800';
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +73,7 @@ class _AirPageState extends State<AirPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     onTap: () {
-                      setState(() {
-                        if(switchSensor==true){
-                          switchSensor = false;
-                          sensorStatus = 'Pump is Off';
-                          statusColor = colorOff;
-                        }else{
-                          switchSensor = true;
-                          sensorStatus = 'Pump is On';
-                          statusColor = colorOn;
-                        }
-                      });
+                      switchAir();
                     }
                 ),
               ),
@@ -83,10 +96,10 @@ class _AirPageState extends State<AirPage> {
                     color: textColor,
                   ),
                 ),
-                subtitle: const Text(
-                  'OK',
+                subtitle: Text(
+                  pumpStatus,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: colorOn,
                     fontSize: 33.0,
                     //TODO: edit textsize according to expanded
@@ -107,10 +120,10 @@ class _AirPageState extends State<AirPage> {
                     color: textColor,
                   ),
                 ),
-                subtitle: const Text(
-                  '800Pa',
+                subtitle: Text(
+                  '$airPressure Pa',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     // color: colorOn,
                     fontSize: 33.0,
                   ),

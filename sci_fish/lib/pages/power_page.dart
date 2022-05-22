@@ -12,12 +12,40 @@ class PowerPage extends StatefulWidget {
 
 class _PowerPageState extends State<PowerPage> {
 
-  bool switchPower = false;
-  bool switchCam = false;
+  bool power = false;
+  bool cam = false;
   String powerStatus = 'Power is OFF';
   String camStatus = 'Camera is OFF';
   Color powerStatusColor = colorOff;
   Color camStatusColor = colorOff;
+
+  void switchPower(){
+    setState(() {
+      if(power==true){
+        power = false;
+        powerStatus = 'Power is OFF';
+        powerStatusColor = colorOff;
+      }else{
+        power = true;
+        powerStatus = 'Power is ON';
+        powerStatusColor = colorOn;
+      }
+    });
+  }
+
+  void switchCam(){
+    setState(() {
+      if(cam==true){
+        cam = false;
+        camStatus = 'Camera is OFF';
+        camStatusColor = colorOff;
+      }else{
+        cam = true;
+        camStatus = 'Camera is ON';
+        camStatusColor = colorOn;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +81,7 @@ class _PowerPageState extends State<PowerPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: () {
-                    setState(() {
-                      if(switchPower==true){
-                        switchPower = false;
-                        powerStatus = 'Power is Off';
-                        powerStatusColor = colorOff;
-                      }else{
-                        switchPower = true;
-                        powerStatus = 'Power is On';
-                        powerStatusColor = colorOn;
-                      }
-                    });
+                    switchPower();
                   },
                 ),
               ),
@@ -98,17 +116,7 @@ class _PowerPageState extends State<PowerPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: () {
-                    setState(() {
-                      if(switchCam==true){
-                        switchCam = false;
-                        camStatus = 'Camera is Off';
-                        camStatusColor = colorOff;
-                      }else{
-                        switchCam = true;
-                        camStatus = 'Camera is On';
-                        camStatusColor = colorOn;
-                      }
-                    });
+                    switchCam();
                   },
                 ),
               ),

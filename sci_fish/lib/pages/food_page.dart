@@ -19,9 +19,23 @@ class _FoodPageState extends State<FoodPage> {
   // }
   late String currentDose;
   late String doseInterval;
-  bool switchFeeder = false;
+  bool feeder = false;
   String feederStatus = 'Feeder is OFF' ;
   Color statusColor = colorOff;
+
+  void switchFeeder(){
+    setState(() {
+      if(feeder==true){
+        feeder = false;
+        feederStatus = 'Feeder is OFF';
+        statusColor = colorOff;
+      }else{
+        feeder = true;
+        feederStatus = 'Feeder is ON';
+        statusColor = colorOn;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +77,7 @@ class _FoodPageState extends State<FoodPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     onTap: () {
-                      setState(() {
-                        if(switchFeeder==true){
-                          switchFeeder = false;
-                          feederStatus = 'Feeder is Off';
-                          statusColor = colorOff;
-                        }else{
-                          switchFeeder = true;
-                          feederStatus = 'Feeder is On';
-                          statusColor = colorOn;
-                        }
-                      });
+                      switchFeeder();
                     },
                   ),
                 ),

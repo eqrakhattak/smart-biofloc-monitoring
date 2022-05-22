@@ -16,6 +16,29 @@ class _TemperaturePageState extends State<TemperaturePage> {
   String sensorStatus = 'Sensor is OFF' ;
   Color statusColor = colorOff;
 
+  String tempC = '_';
+  String tempF = '_';
+
+  void switchTemp(){
+    setState(() {
+      if(switchSensor==true){
+        switchSensor = false;
+        sensorStatus = 'Sensor is OFF';
+        statusColor = colorOff;
+
+        tempC = '_';
+        tempF = '_';
+      }else{
+        switchSensor = true;
+        sensorStatus = 'Sensor is ON';
+        statusColor = colorOn;
+
+        tempC = '33';
+        tempF = '78';
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +73,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: () {
-                    setState(() {
-                      if(switchSensor==true){
-                        switchSensor = false;
-                        sensorStatus = 'Sensor is Off';
-                        statusColor = colorOff;
-                      }else{
-                        switchSensor = true;
-                        sensorStatus = 'Sensor is On';
-                        statusColor = colorOn;
-                      }
-                    });
+                    switchTemp();
                   }
                 ),
               ),
@@ -85,10 +98,10 @@ class _TemperaturePageState extends State<TemperaturePage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '33°C',
+                  subtitle: Text(
+                    '$tempC °C',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                       //TODO: edit textsize according to expanded
                     ),
@@ -111,10 +124,10 @@ class _TemperaturePageState extends State<TemperaturePage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '78°F',
+                  subtitle: Text(
+                    '$tempF °F',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                     ),
                   ),

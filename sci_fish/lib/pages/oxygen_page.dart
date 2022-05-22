@@ -16,6 +16,32 @@ class _OxygenPageState extends State<OxygenPage> {
   String sensorStatus = 'Sensor is OFF' ;
   Color statusColor = colorOff;
 
+  String raw = '_';
+  String voltage = '_';
+  String DOlevel = '_';
+
+  void switchOxygen(){
+    setState(() {
+      if(switchSensor==true){
+        switchSensor = false;
+        sensorStatus = 'Sensor is OFF';
+        statusColor = colorOff;
+
+        raw = '_';
+        voltage = '_';
+        DOlevel = '_';
+      }else{
+        switchSensor = true;
+        sensorStatus = 'Sensor is ON';
+        statusColor = colorOn;
+
+        raw = '29';
+        voltage = '141';
+        DOlevel = '8879';
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +76,7 @@ class _OxygenPageState extends State<OxygenPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: () {
-                    setState(() {
-                      if(switchSensor==true){
-                        switchSensor = false;
-                        sensorStatus = 'Sensor is Off';
-                        statusColor = colorOff;
-                      }else{
-                        switchSensor = true;
-                        sensorStatus = 'Sensor is On';
-                        statusColor = colorOn;
-                      }
-                    });
+                    switchOxygen();
                   }
                 ),
               ),
@@ -85,10 +101,10 @@ class _OxygenPageState extends State<OxygenPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '29',
+                  subtitle: Text(
+                    raw,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                     ),
                   ),
@@ -110,10 +126,10 @@ class _OxygenPageState extends State<OxygenPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '141V',
+                  subtitle: Text(
+                    '$voltage V',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                       //TODO: edit textsize according to expanded
                     ),
@@ -136,10 +152,10 @@ class _OxygenPageState extends State<OxygenPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '8879 µg/L',
+                  subtitle: Text(
+                    '$DOlevel µg/L',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                     ),
                   ),

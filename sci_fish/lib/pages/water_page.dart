@@ -13,8 +13,34 @@ class WaterPage extends StatefulWidget {
 class _WaterPageState extends State<WaterPage> {
 
   bool switchSensor = false;
-  String sensorStatus = 'Sensor is OFF' ;
+  String sensorStatus = 'Sensor is OFF';
   Color statusColor = colorOff;
+
+  String waterLevelStatus = '_';
+  String waterVolume = '_';
+  String waterLevel = '_';
+
+  void switchWater(){
+    setState(() {
+      if(switchSensor==true){
+        switchSensor = false;
+        sensorStatus = 'Sensor is OFF';
+        statusColor = colorOff;
+
+        waterLevelStatus = '_';
+        waterVolume = '_';
+        waterLevel = '_';
+      }else{
+        switchSensor = true;
+        sensorStatus = 'Sensor is ON';
+        statusColor = colorOn;
+
+        waterLevelStatus = 'HIGH';
+        waterVolume = '880';
+        waterLevel = '56';
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +76,7 @@ class _WaterPageState extends State<WaterPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: () {
-                    setState(() {
-                      if(switchSensor==true){
-                        switchSensor = false;
-                        sensorStatus = 'Feeder is Off';
-                        statusColor = colorOff;
-                      }else{
-                        switchSensor = true;
-                        sensorStatus = 'Feeder is On';
-                        statusColor = colorOn;
-                      }
-                    });
+                    switchWater();
                   }
                 ),
               ),
@@ -85,10 +101,10 @@ class _WaterPageState extends State<WaterPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    'HIGH',
+                  subtitle: Text(
+                    waterLevelStatus,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: colorOn,
                       fontSize: 33.0,
                     ),
@@ -111,10 +127,10 @@ class _WaterPageState extends State<WaterPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '880L',
+                  subtitle: Text(
+                    '$waterVolume L',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                       //TODO: edit textsize according to expanded
                     ),
@@ -137,10 +153,10 @@ class _WaterPageState extends State<WaterPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '56cm',
+                  subtitle: Text(
+                    '$waterLevel cm',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                     ),
                   ),

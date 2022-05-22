@@ -16,6 +16,29 @@ class _PhPageState extends State<PhPage> {
   String sensorStatus = 'Sensor is OFF' ;
   Color statusColor = colorOff;
 
+  String potPinValue = '_';
+  String pH = '_';
+
+  void switchPh(){
+    setState(() {
+      if(switchSensor==true){
+        switchSensor = false;
+        sensorStatus = 'Sensor is OFF';
+        statusColor = colorOff;
+
+        potPinValue = '_';
+        pH = '_';
+      }else{
+        switchSensor = true;
+        sensorStatus = 'Sensor is ON';
+        statusColor = colorOn;
+
+        potPinValue = '278.00';
+        pH = '0.74';
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +73,7 @@ class _PhPageState extends State<PhPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     onTap: () {
-                      setState(() {
-                        if(switchSensor==true){
-                          switchSensor = false;
-                          sensorStatus = 'Sensor is Off';
-                          statusColor = colorOff;
-                        }else{
-                          switchSensor = true;
-                          sensorStatus = 'Sensor is On';
-                          statusColor = colorOn;
-                        }
-                      });
+                      switchPh();
                     }
                 ),
               ),
@@ -85,10 +98,10 @@ class _PhPageState extends State<PhPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '278.00',
+                  subtitle: Text(
+                    potPinValue,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                       //TODO: edit textsize according to expanded
                     ),
@@ -111,10 +124,10 @@ class _PhPageState extends State<PhPage> {
                       color: textColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    '0.74',
+                  subtitle: Text(
+                    pH,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                     ),
                   ),
