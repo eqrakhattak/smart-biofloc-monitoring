@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "884952258015",
+    "project_id": "scifish-570ad",
+    "storage_bucket": "scifish-570ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884952258015:android:29f75a27a2aeb94873606a",
+        "android_client_info": {
+          "package_name": "com.eqrakhattak.sci_fish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884952258015-2nqprcnn5137ptos0610s5o9ut52u4gp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm-OvE0fLLSBQuIAma8W9dVbkufL_ovlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884952258015-2nqprcnn5137ptos0610s5o9ut52u4gp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
