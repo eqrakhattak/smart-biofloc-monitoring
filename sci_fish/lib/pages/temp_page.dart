@@ -30,10 +30,11 @@ class _TemperaturePageState extends State<TemperaturePage> {
   }
 
   void temperatureStream() async{
-    print('chal ra hai bhai');
+    print('this prints');
     await for(var snapshot in _firestore.collection('temperature').snapshots()){
       for(var temp in snapshot.docs){
-        print(temp.data);
+        print('this doesnt');
+        print(temp.data());
       }
     }
   }
