@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class TemperaturePage extends StatefulWidget {
   const TemperaturePage({Key? key}) : super(key: key);
 
@@ -12,12 +12,31 @@ class TemperaturePage extends StatefulWidget {
 
 class _TemperaturePageState extends State<TemperaturePage> {
 
+  final _firestore = FirebaseFirestore.instance;
+
   bool switchSensor = false;
   String sensorStatus = 'Sensor is OFF' ;
   Color statusColor = colorOff;
 
   String tempC = '_';
   String tempF = '_';
+
+  void getTemperature() async{
+    print('this is working');
+    final temperatures = await _firestore.collection('temperature').get();
+    for(var temp in temperatures.docs){
+      print(temp.data());
+    }
+  }
+
+  void temperatureStream() async{
+    print('chal ra hai bhai');
+    await for(var snapshot in _firestore.collection('temperature').snapshots()){
+      for(var temp in snapshot.docs){
+        print(temp.data);
+      }
+    }
+  }
 
   void switchTemp(){
     setState(() {
@@ -73,7 +92,9 @@ class _TemperaturePageState extends State<TemperaturePage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: () {
-                    switchTemp();
+                    // switchTemp();
+                    // getTemperature();
+                    temperatureStream();
                   }
                 ),
               ),
