@@ -29,6 +29,13 @@
             {
               "client_id": "884952258015-2nqprcnn5137ptos0610s5o9ut52u4gp.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "884952258015-eqb95i45nhuvl6a43un2dmo5abduuan4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eqrakhattak.sciFish"
+              }
             }
           ]
         }

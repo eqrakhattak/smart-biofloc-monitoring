@@ -26,7 +26,7 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   firebase_core: ^1.17.0
   firebase_auth: ^3.3.18
-  cloud_firestore: ^3.1.15
+  cloud_firestore: ^3.1.16
 #  video_player: ^2.4.2
 
 dev_dependencies:
