@@ -31,12 +31,27 @@ class _TemperaturePageState extends State<TemperaturePage> {
 
   void temperatureStream() async{
     print('this prints');
-    await for(var snapshot in _firestore.collection('temperature').snapshots()){
+    final qs = FirebaseFirestore.instance.collection('temperature').snapshots();
+    // final data = qs.
+    await for(var snapshot in qs){
       for(var temp in snapshot.docs){
         print('this doesnt');
         print(temp.data());
       }
     }
+  }
+
+  tempStream() async{
+    print('doesnt');
+    final qs = await FirebaseFirestore.instance.collection('pH').get();
+    // final data = qs.map((event) {
+    //   for (var reading in event.docs) {
+    //     print(reading.data());
+    //     // return reading.data();
+    //   }
+    // });
+    final data = qs.docs;
+    // return data;
   }
 
   void switchTemp(){
@@ -95,7 +110,8 @@ class _TemperaturePageState extends State<TemperaturePage> {
                   onTap: () {
                     // switchTemp();
                     // getTemperature();
-                    temperatureStream();
+                    // temperatureStream();
+                    tempStream();
                   }
                 ),
               ),
