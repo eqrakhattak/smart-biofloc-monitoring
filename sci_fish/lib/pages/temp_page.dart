@@ -21,21 +21,18 @@ class _TemperaturePageState extends State<TemperaturePage> {
   String tempC = '_';
   String tempF = '_';
 
-  void getTemperature() async{
-    print('this is working');
-    final temperatures = await _firestore.collection('temperature').get();
-    for(var temp in temperatures.docs){
-      print(temp.data());
-    }
-  }
+  // void getTemperature() async{
+  //   print('this is working');
+  //   final temperatures = await _firestore.collection('temperature').get();
+  //   for(var temp in temperatures.docs){
+  //     print(temp.data());
+  //   }
+  // }
 
   void temperatureStream() async{
-    print('this prints');
-    final qs = _firestore.collection('temp').snapshots();
-    // final data = qs.
+    final qs = await _firestore.collection('temp').snapshots();
     await for(var snapshot in qs){
       for(var temp in snapshot.docs){
-        print('this doesnt');
         print(temp.data());
       }
     }
@@ -125,6 +122,26 @@ class _TemperaturePageState extends State<TemperaturePage> {
               ),
               const SizedBox(
                 height: 20.0,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream: _firestore.collection('temp').snapshots(),
+                builder: (context, snapshot) {
+                  if(!snapshot.hasData){
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: textColor,
+                      ),
+                    );
+                  }
+                  final tempdatas = snapshot.data!.docs;
+                  List<Text> tempwidgets = [];
+                  for(var temps in tempdatas){
+                    final temp = temps.data() as Map<String, QueryDocumentSnapshot>;
+                    print("celcius: ${temp['celcius']}");
+                    print("fahrenheit: ${temp['fahrenheit']}");
+                  }
+                  return Container(); //TODO: put the right thing in here
+                },
               ),
               Expanded(
                 flex: 1,
