@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
+import '../components/check_internet.dart';
 
 class PhPage extends StatefulWidget {
   const PhPage({Key? key}) : super(key: key);
@@ -12,10 +14,10 @@ class PhPage extends StatefulWidget {
 
 class _PhPageState extends State<PhPage> {
 
-  bool switchSensor = false;
-  String sensorStatus = 'Sensor is OFF' ;
-  Color statusColor = colorOff;
-
+  final _firestore = FirebaseFirestore.instance;
+  bool switchSensor = true;
+  String sensorStatus = 'Sensor is ON' ;
+  Color statusColor = colorOn;
   String potPinValue = '_';
   String pH = '_';
 
@@ -25,14 +27,12 @@ class _PhPageState extends State<PhPage> {
         switchSensor = false;
         sensorStatus = 'Sensor is OFF';
         statusColor = colorOff;
-
         potPinValue = '_';
         pH = '_';
       }else{
         switchSensor = true;
         sensorStatus = 'Sensor is ON';
         statusColor = colorOn;
-
         potPinValue = '278.00';
         pH = '0.74';
       }
@@ -89,53 +89,79 @@ class _PhPageState extends State<PhPage> {
               const SizedBox(
                 height: 20.0,
               ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Pot Pin Value',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    potPinValue,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                      //TODO: edit textsize according to expanded
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'pH',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    pH,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+              StreamBuilder<QuerySnapshot>(
+                stream: _firestore.collection('pH').snapshots(),
+                builder: (context, snapshot) {
+                  if(!snapshot.hasData){
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: textColor,
+                      ),
+                    );
+                  }
+                  final phData = snapshot.data!.docs;
+                  for(var phs in phData){
+                    final ph = phs.data() as Map<String, dynamic>;
+                    if(ph['potpin'] != null){
+                      potPinValue = ph['potpin'] as String;
+                    }
+                    if(ph['phvalue'] != null){
+                      pH = ph['phvalue'] as String;
+                    }
+                    isInternet();
+                  }
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: const Text(
+                          'pH',
+                          style: TextStyle(
+                            color: textColor,
+                          ),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            pH,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 33.0,
+                            ),
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      ListTile(
+                        title: const Text(
+                          'Pot Pin Value',
+                          style: TextStyle(
+                            color: textColor,
+                          ),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            potPinValue,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 33.0,
+                            ),
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ],
+                  );
+                }
               ),
               const SizedBox(
                 height: 15.0,

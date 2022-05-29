@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
+import '../components/check_internet.dart';
 
 class AirPage extends StatefulWidget {
   const AirPage({Key? key}) : super(key: key);
@@ -12,10 +14,10 @@ class AirPage extends StatefulWidget {
 
 class _AirPageState extends State<AirPage> {
 
-  bool switchSensor = false;
-  String sensorStatus = 'Pump is OFF' ;
-  Color statusColor = colorOff;
-
+  final _firestore = FirebaseFirestore.instance;
+  bool switchSensor = true;
+  String sensorStatus = 'Pump is ON' ;
+  Color statusColor = colorOn;
   String pumpStatus = '_';
   String airPressure = '_';
 
@@ -89,50 +91,84 @@ class _AirPageState extends State<AirPage> {
               const SizedBox(
                 height: 20.0,
               ),
-              ListTile(
-                title: const Text(
-                  'Air Pump Status',
-                  style: TextStyle(
-                    color: textColor,
-                  ),
-                ),
-                subtitle: Text(
-                  pumpStatus,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: colorOn,
-                    fontSize: 33.0,
-                    //TODO: edit textsize according to expanded
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: _firestore.collection('air').snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: textColor,
+                        ),
+                      );
+                    }
+                    final airData = snapshot.data!.docs;
+                    for (var airflow in airData) {
+                      final airpump = airflow.data() as Map<String, dynamic>;
+                      if(airpump['status'] != null){
+                        pumpStatus = airpump['status'] as String;
+                      }
+                      if(airpump['pressure'] != null){
+                        airPressure = airpump['pressure'] as String;
+                      }
+                      isInternet();
+                    }
+                    return Column(
+                        children: [
+                          ListTile(
+                            title: const Text(
+                              'Air Pump Status',
+                              style: TextStyle(
+                                color: textColor,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                pumpStatus,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: colorOn,
+                                  fontSize: 33.0,
+                                  //TODO: edit textsize according to expanded
+                                ),
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          ListTile(
+                            title: const Text(
+                              'Air Pressure',
+                              style: TextStyle(
+                                color: textColor,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                '$airPressure Pa',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  // color: colorOn,
+                                  fontSize: 33.0,
+                                ),
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ]
+                    );
+                  }
               ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              ListTile(
-                title: const Text(
-                  'Air Pressure',
-                  style: TextStyle(
-                    color: textColor,
-                  ),
-                ),
-                subtitle: Text(
-                  '$airPressure Pa',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    // color: colorOn,
-                    fontSize: 33.0,
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+
             ],
           ),
         ),

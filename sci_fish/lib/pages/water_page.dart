@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
+import '../components/check_internet.dart';
 
 class WaterPage extends StatefulWidget {
   const WaterPage({Key? key}) : super(key: key);
@@ -12,10 +14,10 @@ class WaterPage extends StatefulWidget {
 
 class _WaterPageState extends State<WaterPage> {
 
-  bool switchSensor = false;
-  String sensorStatus = 'Sensor is OFF';
-  Color statusColor = colorOff;
-
+  final _firestore = FirebaseFirestore.instance;
+  bool switchSensor = true;
+  String sensorStatus = 'Sensor is ON';
+  Color statusColor = colorOn;
   String waterLevelStatus = '_';
   String waterVolume = '_';
   String waterLevel = '_';
@@ -92,79 +94,102 @@ class _WaterPageState extends State<WaterPage> {
               const SizedBox(
                 height: 15.0,
               ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Water Level Status',     //water tank status
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    waterLevelStatus,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: colorOn,
-                      fontSize: 33.0,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Water Volume',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '$waterVolume L',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                      //TODO: edit textsize according to expanded
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Water Level',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '$waterLevel cm',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: _firestore.collection('water').snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: textColor,
+                        ),
+                      );
+                    }
+                    final waterData = snapshot.data!.docs;
+                    for (var levels in waterData) {
+                      final wlevel = levels.data() as Map<String, dynamic>;
+                      waterLevelStatus = wlevel['status'] as String;
+                      waterVolume = wlevel['volume'] as String;
+                      waterLevel = wlevel['level'] as String;
+                      isInternet();
+                    }
+                    return Column(
+                        children: [
+                          ListTile(
+                            title: const Text(
+                              'Water Level Status',     //water tank status
+                              style: TextStyle(
+                                color: textColor,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                waterLevelStatus,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: colorOn,
+                                  fontSize: 33.0,
+                                ),
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          ListTile(
+                            title: const Text(
+                              'Water Level',
+                              style: TextStyle(
+                                color: textColor,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                '$waterLevel cm',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 33.0,
+                                ),
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          ListTile(
+                            title: const Text(
+                              'Water Volume',
+                              style: TextStyle(
+                                color: textColor,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                '$waterVolume L',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 33.0,
+                                ),
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ]
+                    );
+                  }
               ),
               const SizedBox(
                 height: 15.0,

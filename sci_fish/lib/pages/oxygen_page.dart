@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
+import '../components/check_internet.dart';
 
 class OxygenPage extends StatefulWidget {
   const OxygenPage({Key? key}) : super(key: key);
@@ -12,13 +14,13 @@ class OxygenPage extends StatefulWidget {
 
 class _OxygenPageState extends State<OxygenPage> {
 
-  bool switchSensor = false;
-  String sensorStatus = 'Sensor is OFF' ;
-  Color statusColor = colorOff;
-
+  final _firestore = FirebaseFirestore.instance;
+  bool switchSensor = true;
+  String sensorStatus = 'Sensor is ON' ;
+  Color statusColor = colorOn;
   String raw = '_';
   String voltage = '_';
-  String DOlevel = '_';
+  String doLevel = '_';
 
   void switchOxygen(){
     setState(() {
@@ -29,7 +31,7 @@ class _OxygenPageState extends State<OxygenPage> {
 
         raw = '_';
         voltage = '_';
-        DOlevel = '_';
+        doLevel = '_';
       }else{
         switchSensor = true;
         sensorStatus = 'Sensor is ON';
@@ -37,7 +39,7 @@ class _OxygenPageState extends State<OxygenPage> {
 
         raw = '29';
         voltage = '141';
-        DOlevel = '8879';
+        doLevel = '8879';
       }
     });
   }
@@ -92,78 +94,107 @@ class _OxygenPageState extends State<OxygenPage> {
               const SizedBox(
                 height: 15.0,
               ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'ADC Raw',     //water tank status
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    raw,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'ADC Voltage',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '$voltage V',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                      //TODO: edit textsize according to expanded
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Dissolved Oxygen Level',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '$DOlevel µg/L',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: _firestore.collection('oxygen').snapshots(),
+                  builder: (context, snapshot) {
+                    if(!snapshot.hasData){
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: textColor,
+                        ),
+                      );
+                    }
+                    final oxygenData = snapshot.data!.docs;
+                    for(var oxys in oxygenData){
+                      final oxy = oxys.data() as Map<String, dynamic>;
+                      if(oxy['DOlevel'] != null) {
+                        doLevel = oxy['DOlevel'] as String;
+                      }
+                      if(oxy['voltage'] != null) {
+                        voltage = oxy['voltage'] as String;
+                      }
+                      if(oxy['raw'] != null) {
+                        raw = oxy['raw'] as String;
+                      }
+                      isInternet();
+                    }
+                    return Column(
+                      children: [
+                        ListTile(
+                          title: const Text(
+                            'Dissolved Oxygen Level',
+                            style: TextStyle(
+                              color: textColor,
+                            ),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              '$doLevel µg/L',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 33.0,
+                              ),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        ListTile(
+                          title: const Text(
+                            'ADC Voltage',
+                            style: TextStyle(
+                              color: textColor,
+                            ),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              '$voltage V',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 33.0,
+                              ),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        ListTile(
+                          title: const Text(
+                            'ADC Raw',     //water tank status
+                            style: TextStyle(
+                              color: textColor,
+                            ),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              raw,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 33.0,
+                              ),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
               ),
               const SizedBox(
                 height: 15.0,

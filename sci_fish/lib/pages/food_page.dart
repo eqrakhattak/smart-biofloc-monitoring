@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../components/check_internet.dart';
+
 class FoodPage extends StatefulWidget {
   const FoodPage({Key? key}) : super(key: key);
 
@@ -13,16 +15,12 @@ class FoodPage extends StatefulWidget {
 
 class _FoodPageState extends State<FoodPage> {
 
-  // @override
-  // void initState(){
-  //   super.initState();
-  //
-  // }
-  late String currentDose;
-  late String doseInterval;
-  bool feeder = false;
-  String feederStatus = 'Feeder is OFF' ;
-  Color statusColor = colorOff;
+  final _firestore = FirebaseFirestore.instance;
+  late String currentDose = '0';
+  late String doseInterval = '0';
+  bool feeder = true;
+  String feederStatus = 'Feeder is ON' ;
+  Color statusColor = colorOn;
 
   void switchFeeder(){
     setState(() {
@@ -36,6 +34,15 @@ class _FoodPageState extends State<FoodPage> {
         statusColor = colorOn;
       }
     });
+  }
+
+  void updateFeedInfo(){
+    final data = <String, String>{
+      'dose': currentDose,
+      'interval': doseInterval
+    };
+    _firestore.collection('food').doc('2012').set(data)
+        .onError((e, _) => print("Error writing document: $e"));
   }
 
   @override
@@ -94,54 +101,83 @@ class _FoodPageState extends State<FoodPage> {
                 const SizedBox(
                   height: 15.0,
                 ),
-                TextField(
-                  // controller: nameController,
-                  keyboardType: TextInputType.number,
-                  maxLength: 4,
-                  style: const TextStyle(
-                    color: textColor,
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFF10898d),),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    labelText: 'Current Dose (g)',
-                    labelStyle: const TextStyle(
-                      fontSize: 22.0,
-                      color: textColor,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    currentDose = value;
-                    // print(currentDose);
-                  },
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                TextField(
-                  // controller: nameController,
-                  keyboardType: TextInputType.number,
-                  maxLength: 2,
-                  style: const TextStyle(
-                    color: textColor,
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xFF10898d),),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    labelText: 'Dose Interval (hrs)',
-                    labelStyle: const TextStyle(
-                      fontSize: 22.0,
-                      color: textColor,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    doseInterval = value;
-                    // print(doseInterval);
-                  },
+                StreamBuilder<QuerySnapshot>(
+                    stream: _firestore.collection('food').snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: textColor,
+                          ),
+                        );
+                      }
+                      final foodData = snapshot.data!.docs;
+                      for (var feed in foodData) {
+                        final pallets = feed.data() as Map<String, dynamic>;
+                        if(pallets['dose'] != null){
+                          currentDose = pallets['dose'] as String;
+                        }
+                        if(pallets['interval'] != null){
+                          doseInterval = pallets['interval'] as String;
+                        }
+                        isInternet();
+                      }
+                      return Column(
+                          children: [
+                            TextFormField(
+                              initialValue: currentDose,
+                              keyboardType: TextInputType.number,
+                              maxLength: 4,
+                              style: const TextStyle(
+                                color: textColor,
+                              ),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Color(0xFF10898d),),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                labelText: 'Current Dose (g)',
+                                labelStyle: const TextStyle(
+                                  fontSize: 22.0,
+                                  color: textColor,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                currentDose = value;
+                                print(currentDose);
+                                updateFeedInfo();
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            TextFormField(
+                              initialValue: doseInterval,
+                              keyboardType: TextInputType.number,
+                              maxLength: 2,
+                              style: const TextStyle(
+                                color: textColor,
+                              ),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Color(0xFF10898d),),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                labelText: 'Dose Interval (hrs)',
+                                labelStyle: const TextStyle(
+                                  fontSize: 22.0,
+                                  color: textColor,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                doseInterval = value;
+                                print(doseInterval);
+                                updateFeedInfo();
+                              },
+                            ),
+                          ]
+                      );
+                    }
                 ),
                 const SizedBox(
                   height: 70.0,

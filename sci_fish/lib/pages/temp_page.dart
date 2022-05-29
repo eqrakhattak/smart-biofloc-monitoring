@@ -31,14 +31,14 @@ class _TemperaturePageState extends State<TemperaturePage> {
   //   }
   // }
 
-  void temperatureStream() async{
-    final qs = await _firestore.collection('temp').snapshots();
-    await for(var snapshot in qs){
-      for(var temp in snapshot.docs){
-        print(temp.data());
-      }
-    }
-  }
+  // void temperatureStream() async{
+  //   final qs = await _firestore.collection('temp').snapshots();
+  //   await for(var snapshot in qs){
+  //     for(var temp in snapshot.docs){
+  //       print(temp.data());
+  //     }
+  //   }
+  // }
 
   // tempStream() async{
   //   print('doesnt');
@@ -66,7 +66,6 @@ class _TemperaturePageState extends State<TemperaturePage> {
         statusColor = colorOn;
         tempC = '33';
         tempF = '78';
-        isInternet();
       }
     });
   }
@@ -135,10 +134,12 @@ class _TemperaturePageState extends State<TemperaturePage> {
                   // List<Text> tempwidgets = [];
                   for(var temps in tempData){
                     final temp = temps.data() as Map<String, dynamic>;
-                    tempC = temp['celcius'] as String;
-                    tempF = temp['fahrenheit'] as String;
-                    // print("celcius: ${temp['celcius']}");
-                    // print("fahrenheit: $tempF");
+                    if(temp['celcius'] != null){
+                      tempC = temp['celcius'] as String;
+                    }
+                    if(temp['fahrenheit'] != null){
+                      tempF = temp['fahrenheit'] as String;
+                    }
                     isInternet();
                   }
                   return Column(

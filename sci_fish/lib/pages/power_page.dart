@@ -12,11 +12,11 @@ class PowerPage extends StatefulWidget {
 
 class _PowerPageState extends State<PowerPage> {
 
-  bool power = false;
+  bool power = true;
   bool cam = false;
-  String powerStatus = 'Power is OFF';
+  String powerStatus = 'Power is ON';
   String camStatus = 'Camera is OFF';
-  Color powerStatusColor = colorOff;
+  Color powerStatusColor = colorOn;
   Color camStatusColor = colorOff;
 
   void switchPower(){
