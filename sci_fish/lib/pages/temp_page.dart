@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../components/check_internet.dart';
+
 class TemperaturePage extends StatefulWidget {
   const TemperaturePage({Key? key}) : super(key: key);
 
@@ -14,9 +16,9 @@ class _TemperaturePageState extends State<TemperaturePage> {
 
   final _firestore = FirebaseFirestore.instance;
 
-  bool switchSensor = false;
-  String sensorStatus = 'Sensor is OFF' ;
-  Color statusColor = colorOff;
+  bool switchSensor = true;
+  String sensorStatus = 'Sensor is ON' ;
+  Color statusColor = colorOn;
 
   String tempC = '_';
   String tempF = '_';
@@ -56,16 +58,15 @@ class _TemperaturePageState extends State<TemperaturePage> {
         switchSensor = false;
         sensorStatus = 'Sensor is OFF';
         statusColor = colorOff;
-
         tempC = '_';
         tempF = '_';
       }else{
         switchSensor = true;
         sensorStatus = 'Sensor is ON';
         statusColor = colorOn;
-
         tempC = '33';
         tempF = '78';
+        isInternet();
       }
     });
   }
@@ -104,10 +105,7 @@ class _TemperaturePageState extends State<TemperaturePage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: () {
-                    // switchTemp();
-                    // getTemperature();
-                    temperatureStream();
-                    // tempStream();
+                    switchTemp();
                   }
                 ),
               ),
@@ -133,63 +131,68 @@ class _TemperaturePageState extends State<TemperaturePage> {
                       ),
                     );
                   }
-                  final tempdatas = snapshot.data!.docs;
-                  List<Text> tempwidgets = [];
-                  for(var temps in tempdatas){
-                    final temp = temps.data() as Map<String, QueryDocumentSnapshot>;
-                    print("celcius: ${temp['celcius']}");
-                    print("fahrenheit: ${temp['fahrenheit']}");
+                  final tempData = snapshot.data!.docs;
+                  // List<Text> tempwidgets = [];
+                  for(var temps in tempData){
+                    final temp = temps.data() as Map<String, dynamic>;
+                    tempC = temp['celcius'] as String;
+                    tempF = temp['fahrenheit'] as String;
+                    // print("celcius: ${temp['celcius']}");
+                    // print("fahrenheit: $tempF");
+                    isInternet();
                   }
-                  return Container(); //TODO: put the right thing in here
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: const Text(
+                          'Celsius Temperature',
+                          style: TextStyle(
+                            color: textColor,
+                          ),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '$tempC °C',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 33.0,
+                            ),
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      ListTile(
+                        title: const Text(
+                          'Fahrenheit Temperature',
+                          style: TextStyle(
+                            color: textColor,
+                          ),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '$tempF °F',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 33.0,
+                            ),
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(color: Color(0xFF10898d), width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ]
+                  );
                 },
-              ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Celsius Temperature',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '$tempC °C',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                      //TODO: edit textsize according to expanded
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 1,
-                child: ListTile(
-                  title: const Text(
-                    'Fahrenheit Temperature',
-                    style: TextStyle(
-                      color: textColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '$tempF °F',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 33.0,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Color(0xFF10898d), width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 15.0,
