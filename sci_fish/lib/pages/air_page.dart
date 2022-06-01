@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 import '../components/check_internet.dart';
+import 'package:lottie/lottie.dart';
 
 class AirPage extends StatefulWidget {
   const AirPage({Key? key}) : super(key: key);
@@ -129,7 +130,6 @@ class _AirPageState extends State<AirPage> {
                                 style: const TextStyle(
                                   color: colorOn,
                                   fontSize: 33.0,
-                                  //TODO: edit textsize according to expanded
                                 ),
                               ),
                             ),
@@ -168,7 +168,11 @@ class _AirPageState extends State<AirPage> {
                     );
                   }
               ),
-
+              Flexible(
+                child: Lottie.asset(
+                  'assets/images/fish.json',
+                ),
+              )
             ],
           ),
         ),

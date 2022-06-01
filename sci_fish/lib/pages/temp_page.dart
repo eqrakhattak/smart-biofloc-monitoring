@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../components/check_internet.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class TemperaturePage extends StatefulWidget {
   const TemperaturePage({Key? key}) : super(key: key);
@@ -22,6 +23,10 @@ class _TemperaturePageState extends State<TemperaturePage> {
 
   String tempC = '_';
   String tempF = '_';
+
+  get onDidReceiveLocalNotification => null;
+
+  get flutterLocalNotificationsPlugin => null;
 
   // void getTemperature() async{
   //   print('this is working');
@@ -68,6 +73,32 @@ class _TemperaturePageState extends State<TemperaturePage> {
         tempF = '78';
       }
     });
+  }
+
+  Future<void> init() async {
+    final AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings('app_icon');
+
+    final IOSInitializationSettings initializationSettingsIOS =
+    IOSInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+    );
+
+    final InitializationSettings initializationSettings =
+    InitializationSettings(
+        android: initializationSettingsAndroid,
+        iOS: initializationSettingsIOS,
+        macOS: null);
+
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: selectNotification);
+  }
+
+  Future selectNotification(String payload) async {
+    //Handle notification tapped logic here
   }
 
   @override
