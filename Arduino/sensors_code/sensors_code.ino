@@ -10,8 +10,8 @@
 #include <DallasTemperature.h>
 
 /* 1. Define the WiFi credentials */
-#define WIFI_SSID "fivebruh"
-#define WIFI_PASSWORD "123456789"
+#define WIFI_SSID "vivoS1"
+#define WIFI_PASSWORD "laraib12"
 
 /* 2. Define the API Key */
 #define API_KEY "AIzaSyDm-OvE0fLLSBQuIAma8W9dVbkufL_ovlw"
