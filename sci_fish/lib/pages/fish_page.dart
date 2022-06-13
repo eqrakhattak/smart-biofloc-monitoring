@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import '../components/check_internet.dart';
 
 class FishPage extends StatefulWidget {
@@ -58,6 +59,7 @@ class _FishPageState extends State<FishPage> {
                         );
                       }
                       final fishData = snapshot.data!.docs;
+                      List<MRData> mortalityList = [];
                       for (var fishes in fishData) {
                         final fish = fishes.data() as Map<String, dynamic>;
                         if(fish['alive'] != null){
@@ -66,9 +68,15 @@ class _FishPageState extends State<FishPage> {
                         if(fish['dead'] != null){
                           noOfDeadFish = fish['dead'] as String;
                         }
+                        mortalityList = [
+                          MRData(status: 'Alive Fish', number: int.parse(noOfAliveFish)),
+                          MRData(status: 'Dead Fish', number: int.parse(noOfDeadFish)),
+                        ];
+
                         isInternet();
                       }
                       return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextFormField(
                               initialValue: noOfAliveFish,
@@ -118,40 +126,29 @@ class _FishPageState extends State<FishPage> {
                                 updateNoOfFish();
                               },
                             ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            const Text(
+                              'Mortality Rate:',
+                              style: TextStyle(
+                                fontSize: 17.0,
+                                color: textColor,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 50.0,
+                            ),
+                            SfCartesianChart(
+                              series: <ChartSeries>[
+                                ColumnSeries<MRData, String>(dataSource: mortalityList, xValueMapper: (MRData number,_)=>number.status, yValueMapper: (MRData number,_)=>number.number),
+                              ],
+                              primaryXAxis: CategoryAxis(),
+                              primaryYAxis: NumericAxis(),
+                            )
                           ]
                       );
                     }
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                const Text(
-                  'Mortality Rate:',
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    color: textColor,
-                  ),
-                ),
-                const SizedBox(
-                  height: 15.0,
-                ),
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Container(
-                      width: double.infinity,
-                      color: Colors.white12,
-                      child: const Center(
-                        //TODO: Add graph in here
-                        child: Text(
-                          'The Mortality Graph HERE',
-                          style: TextStyle(
-                            color: textColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
@@ -160,4 +157,10 @@ class _FishPageState extends State<FishPage> {
       ),
     );
   }
+}
+
+class MRData{
+  MRData({required this.status, required this.number});
+  late final String status;
+  late final int number;
 }

@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../components/check_internet.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class TemperaturePage extends StatefulWidget {
   const TemperaturePage({Key? key}) : super(key: key);
@@ -23,10 +25,6 @@ class _TemperaturePageState extends State<TemperaturePage> {
 
   String tempC = '_';
   String tempF = '_';
-
-  get onDidReceiveLocalNotification => null;
-
-  get flutterLocalNotificationsPlugin => null;
 
   // void getTemperature() async{
   //   print('this is working');
@@ -75,31 +73,31 @@ class _TemperaturePageState extends State<TemperaturePage> {
     });
   }
 
-  Future<void> init() async {
-    final AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('app_icon');
-
-    final IOSInitializationSettings initializationSettingsIOS =
-    IOSInitializationSettings(
-      requestSoundPermission: false,
-      requestBadgePermission: false,
-      requestAlertPermission: false,
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-    );
-
-    final InitializationSettings initializationSettings =
-    InitializationSettings(
-        android: initializationSettingsAndroid,
-        iOS: initializationSettingsIOS,
-        macOS: null);
-
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: selectNotification);
-  }
-
-  Future selectNotification(String payload) async {
-    //Handle notification tapped logic here
-  }
+  // Future<void> init() async {
+  //   final AndroidInitializationSettings initializationSettingsAndroid =
+  //   AndroidInitializationSettings('app_icon');
+  //
+  //   final IOSInitializationSettings initializationSettingsIOS =
+  //   IOSInitializationSettings(
+  //     requestSoundPermission: false,
+  //     requestBadgePermission: false,
+  //     requestAlertPermission: false,
+  //     onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+  //   );
+  //
+  //   final InitializationSettings initializationSettings =
+  //   InitializationSettings(
+  //       android: initializationSettingsAndroid,
+  //       iOS: initializationSettingsIOS,
+  //       macOS: null);
+  //
+  //   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+  //       onSelectNotification: selectNotification);
+  // }
+  //
+  // Future selectNotification(String payload) async {
+  //   //Handle notification tapped logic here
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -162,18 +160,23 @@ class _TemperaturePageState extends State<TemperaturePage> {
                     );
                   }
                   final tempData = snapshot.data!.docs;
-                  // List<Text> tempwidgets = [];
+                  List<num> tempCList = [];
+                  List<num> tempFList = [];
+
                   for(var temps in tempData){
                     final temp = temps.data() as Map<String, dynamic>;
                     if(temp['celcius'] != null){
                       tempC = temp['celcius'] as String;
+                      tempCList.add(double.parse(tempC));
                     }
                     if(temp['fahrenheit'] != null){
                       tempF = temp['fahrenheit'] as String;
+                      tempFList.add(double.parse(tempF));
                     }
                     isInternet();
                   }
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ListTile(
                         title: const Text(
@@ -222,41 +225,29 @@ class _TemperaturePageState extends State<TemperaturePage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                    ]
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              const Text(
-                'Temperature per Second:',
-                style: TextStyle(
-                  fontSize: 17.0,
-                  color: textColor,
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 3,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.white12,
-                    child: const Center(
-                      //TODO: Add graph in here
-                      child: Text(
-                        'Temperature Graph HERE',
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      const Text(
+                        'Temperature per Second:',
                         style: TextStyle(
+                          fontSize: 17.0,
                           color: textColor,
                         ),
                       ),
-                    ),
-                  ),
-                ),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      SfSparkLineChart(
+                        data: tempCList,
+                        axisLineWidth: 0,
+                        color: const Color.fromRGBO(184, 71, 189, 0.35),
+                        // borderColor: const Color.fromRGBO(184, 71, 189, 1),
+                        // borderWidth: 1,
+                      ),
+                    ]
+                  );
+                },
               ),
             ],
           ),

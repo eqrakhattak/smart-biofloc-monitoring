@@ -33,6 +33,7 @@ dependencies:
   lottie: ^1.3.0
   local_auth: ^2.1.0
   flutter_local_notifications: ^9.5.3+1
+  syncfusion_flutter_charts: ^20.1.59
 #  video_player: ^2.4.2
 
 dev_dependencies:
@@ -40,7 +41,7 @@ dev_dependencies:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
+  # encourage good coding practices. The l int set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.

@@ -3,14 +3,15 @@
 #elif defined(ESP8266)
 #include <ESP8266WiFi.h>
 #endif
-
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 #include <Firebase_ESP_Client.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
 /* 1. Define the WiFi credentials */
-#define WIFI_SSID "vivoS1"
-#define WIFI_PASSWORD "laraib12"
+#define WIFI_SSID "fivebruh"
+#define WIFI_PASSWORD "123456789"
 
 /* 2. Define the API Key */
 #define API_KEY "AIzaSyDm-OvE0fLLSBQuIAma8W9dVbkufL_ovlw"
@@ -29,9 +30,14 @@ FirebaseConfig config;
 
 unsigned long dataMillis = 0;
 
-// GPIO Data wire is connected to D2 & 3V & G on the esp8266 temprature
+const long utcOffsetInSeconds = 18000;
+// Define NTP Client to get time
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
+
+// GPIO Data wire is connected to D2 & 3V & G on the esp8266 for temprature sensor
 #define ONE_WIRE_BUS 4
-int Sensor = 16; //d0 //RCWL-0516 Input Pin
+int Sensor = 5; //d1 //RCWL-0516 Input Pin
 int led = 2; //LED Pin
 // Setup a oneWire instance to communicate with any OneWire device
 OneWire oneWire(ONE_WIRE_BUS);
@@ -42,6 +48,7 @@ DallasTemperature sensors(&oneWire);
 const int potPin=A0;
 float ph;
 float value=0;
+
 
 void setup()
 {
@@ -60,6 +67,8 @@ void setup()
     Serial.println(WiFi.localIP());
     Serial.println();
 
+    timeClient.begin();
+    
     Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
 
     /* Assign the api key (required) */
@@ -95,7 +104,7 @@ void setup()
     pinMode(potPin,INPUT);
   
     //delay in readings 1sec
-//    delay(1000);
+//    delay(5000);
     
 }
 
@@ -106,9 +115,16 @@ long generateRandom() {
     return negative;
 }
 
+//long convertToMillis(){
+//  long millisecs = timeClient.getHours() * timeClient.getMinutes() * timeClient.getSeconds() * 1000;
+//  return millisecs;
+//}
+
 void loop()
 {
-
+  
+//    timeClient.update();
+  
     // Firebase.ready() should be called repeatedly to handle authentication tasks.
     if (Firebase.ready() && (millis() - dataMillis > 50000 || dataMillis == 0))
     {
@@ -189,4 +205,6 @@ void loop()
             Serial.println(fbdo.errorReason());
         
     }
+
+    delay(5000);
 }

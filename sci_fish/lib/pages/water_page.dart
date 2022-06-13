@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../components/check_internet.dart';
 
 class WaterPage extends StatefulWidget {
@@ -105,14 +106,17 @@ class _WaterPageState extends State<WaterPage> {
                       );
                     }
                     final waterData = snapshot.data!.docs;
+                    List<num> waterLevelList = [];
                     for (var levels in waterData) {
                       final wlevel = levels.data() as Map<String, dynamic>;
                       waterLevelStatus = wlevel['status'] as String;
                       waterVolume = wlevel['volume'] as String;
                       waterLevel = wlevel['level'] as String;
+                      waterLevelList.add(double.parse(waterLevel));
                       isInternet();
                     }
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ListTile(
                             title: const Text(
@@ -187,41 +191,29 @@ class _WaterPageState extends State<WaterPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
+                          const SizedBox(
+                            height: 15.0,
+                          ),
+                          const Text(
+                            'Water Level per Minute:',
+                            style: TextStyle(
+                              fontSize: 17.0,
+                              color: textColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          SfSparkLineChart(
+                            data: waterLevelList,
+                            axisLineWidth: 0,
+                            color: const Color.fromRGBO(184, 71, 189, 0.35),
+                            // borderColor: const Color.fromRGBO(184, 71, 189, 1),
+                            // borderWidth: 1,
+                          ),
                         ]
                     );
                   }
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              const Text(
-                'Water Level per Minute:',
-                style: TextStyle(
-                  fontSize: 17.0,
-                  color: textColor,
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.white12,
-                    child: const Center(
-                      //TODO: Add graph in here
-                      child: Text(
-                        'Water level Graph HERE',
-                        style: TextStyle(
-                          color: textColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ],
           ),

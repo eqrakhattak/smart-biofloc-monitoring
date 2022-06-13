@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sci_fish/constants.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../components/check_internet.dart';
 
 class OxygenPage extends StatefulWidget {
@@ -105,10 +106,13 @@ class _OxygenPageState extends State<OxygenPage> {
                       );
                     }
                     final oxygenData = snapshot.data!.docs;
+                    List<num> oxygenList = [];
+
                     for(var oxys in oxygenData){
                       final oxy = oxys.data() as Map<String, dynamic>;
                       if(oxy['DOlevel'] != null) {
                         doLevel = oxy['DOlevel'] as String;
+                        oxygenList.add(double.parse(doLevel));
                       }
                       if(oxy['voltage'] != null) {
                         voltage = oxy['voltage'] as String;
@@ -119,6 +123,7 @@ class _OxygenPageState extends State<OxygenPage> {
                       isInternet();
                     }
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListTile(
                           title: const Text(
@@ -192,41 +197,29 @@ class _OxygenPageState extends State<OxygenPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        const Text(
+                          'Oxygen Level w.r.t Temperature:',
+                          style: TextStyle(
+                            fontSize: 17.0,
+                            color: textColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 17.0,
+                        ),
+                        SfSparkLineChart(
+                          data: oxygenList,
+                          axisLineWidth: 0,
+                          color: const Color.fromRGBO(184, 71, 189, 0.35),
+                          // borderColor: const Color.fromRGBO(184, 71, 189, 1),
+                          // borderWidth: 1,
+                        ),
                       ],
                     );
                   }
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              const Text(
-                'Oxygen Level w.r.t Temperature:',
-                style: TextStyle(
-                  fontSize: 17.0,
-                  color: textColor,
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.white12,
-                    child: const Center(
-                      //TODO: Add graph in here
-                      child: Text(
-                        'Oxygen level Graph HERE',
-                        style: TextStyle(
-                          color: textColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ],
           ),
