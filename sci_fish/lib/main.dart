@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sci_fish/pages/account_page.dart';
 import 'package:sci_fish/pages/air_page.dart';
 import 'package:sci_fish/pages/fish_page.dart';
 import 'package:sci_fish/pages/food_page.dart';
+import 'package:sci_fish/pages/login_page.dart';
 import 'package:sci_fish/pages/oxygen_page.dart';
 import 'package:sci_fish/pages/ph_page.dart';
 import 'package:sci_fish/pages/power_page.dart';
+import 'package:sci_fish/pages/signup_page.dart';
 import 'package:sci_fish/pages/temp_page.dart';
 import 'package:sci_fish/pages/water_page.dart';
 import 'pages/control_page.dart';
@@ -16,6 +20,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   runApp(const MyApp());
 }
 
@@ -32,9 +37,12 @@ class MyApp extends StatelessWidget {
         splashColor: const Color(0xFF046169),
         highlightColor: const Color(0xFF10898d),
       ),
-      initialRoute: ControlPage.id,
+      initialRoute: LoginPage.id,
       routes: {
-        ControlPage.id: (context) => const ControlPage(title: 'SciFish',),
+        LoginPage.id: (context) => const LoginPage(),
+        SignupPage.id: (context) => const SignupPage(),
+        AccountPage.id: (context) => const AccountPage(),
+        ControlPage.id: (context) => const ControlPage(),
         PowerPage.id: (context) => const PowerPage(),
         WaterPage.id: (context) => const WaterPage(),
         OxygenPage.id: (context) => const OxygenPage(),

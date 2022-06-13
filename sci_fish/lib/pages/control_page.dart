@@ -14,8 +14,7 @@ import 'package:sci_fish/constants.dart';
 
 class ControlPage extends StatefulWidget {
   static const String id = 'control_page';
-  final String title;
-  const ControlPage({Key? key, required this.title}) : super(key: key);
+  const ControlPage({Key? key,}) : super(key: key);
 
   @override
   State<ControlPage> createState() => _ControlPageState();
@@ -27,7 +26,7 @@ class _ControlPageState extends State<ControlPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('SciFish'),
       ),
       body: SafeArea(
         child: Padding(
